@@ -395,6 +395,14 @@
             flex-wrap: wrap;
         }
 
+        .ranking-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
         .ranking-badge {
             font-family: var(--font-mono);
             font-size: 10px;
@@ -589,36 +597,36 @@
 
     <script>
         const modelsData = [
-            { name: "GPT-5.5-high", desc: "OpenAI 当前综合能力最强，多模态旗舰", badge: "OpenAI", metric: "1506", metricLabel: "Arena Elo" },
-            { name: "Claude Opus 4.7 Thinking", desc: "Anthropic 深度推理模型，长上下文处理能力突出", badge: "Anthropic", metric: "1505", metricLabel: "Arena Elo" },
-            { name: "Gemini-3.1-Pro", desc: "Google 旗舰，原生多模态，搜索深度整合", badge: "Google", metric: "1505", metricLabel: "Arena Elo" },
-            { name: "Gemini-3.5-Flash", desc: "Google 高速响应模型，性价比极高", badge: "Google", metric: "1504", metricLabel: "Arena Elo" },
-            { name: "Claude Opus 4.7", desc: "Anthropic 代码与推理综合能力顶尖", badge: "Anthropic", metric: "1503", metricLabel: "Arena Elo" },
-            { name: "Grok-4.20", desc: "xAI 旗舰，实时联网能力强", badge: "xAI", metric: "1496", metricLabel: "Arena Elo" },
-            { name: "GPT-5.4-high", desc: "OpenAI GPT-5 系列高端版", badge: "OpenAI", metric: "1495", metricLabel: "Arena Elo" },
-            { name: "Gemini-3-Pro", desc: "Google 超长上下文，深度搜索整合", badge: "Google", metric: "1492", metricLabel: "Arena Elo" },
-            { name: "Claude Opus 4.6", desc: "Anthropic 安全对齐与高性能平衡", badge: "Anthropic", metric: "1490", metricLabel: "Arena Elo" },
-            { name: "Muse Spark", desc: "Meta 最新旗舰，多模态创作能力强", badge: "Meta", metric: "1489", metricLabel: "Arena Elo" },
-            { name: "Qwen3.7-Max", desc: "阿里巴巴旗舰，中文能力最强，开源", badge: "Alibaba", metric: "1486", metricLabel: "Arena Elo", openSource: true },
-            { name: "Grok-4.1-Thinking", desc: "xAI 深度思维链推理模型", badge: "xAI", metric: "1482", metricLabel: "Arena Elo" },
-            { name: "ERNIE-5.1", desc: "百度文心，中文理解与知识问答见长", badge: "Baidu", metric: "1475", metricLabel: "Arena Elo" },
-            { name: "DeepSeek-V4-Pro", desc: "国产开源之光，推理能力出色", badge: "DeepSeek", metric: "1467", metricLabel: "Arena Elo", openSource: true },
-            { name: "GLM-5.1", desc: "智谱旗舰，长文本理解能力强，开源", badge: "Z.ai", metric: "1467", metricLabel: "Arena Elo", openSource: true },
-            { name: "Kimi-K2.6-Thinking", desc: "Moonshot 推理模型，超长上下文，开源", badge: "Moonshot", metric: "1466", metricLabel: "Arena Elo", openSource: true },
-            { name: "Qwen3.5-Max", desc: "阿里巴巴 Qwen 系列，工具调用能力强", badge: "Alibaba", metric: "1466", metricLabel: "Arena Elo", openSource: true },
-            { name: "MiMo-V2.5-Pro", desc: "小米旗舰，推理与数学表现优异，开源", badge: "Xiaomi", metric: "1466", metricLabel: "Arena Elo", openSource: true },
-            { name: "Seed2.0 Pro", desc: "字节跳动旗舰，多语言能力强", badge: "ByteDance", metric: "1466", metricLabel: "Arena Elo" },
-            { name: "Gemini-2.5-Pro", desc: "Google 经典版本，代码能力突出", badge: "Google", metric: "1460", metricLabel: "Arena Elo" },
-            { name: "DeepSeek-R1-0528", desc: "专注推理，数学/代码顶尖，开源", badge: "DeepSeek", metric: "1426", metricLabel: "Arena Elo", openSource: true },
-            { name: "Hunyuan-Hy3", desc: "腾讯混元，中文创作与企业应用", badge: "Tencent", metric: "1422", metricLabel: "Arena Elo" },
-            { name: "DeepSeek-V3.2-Thinking", desc: "DeepSeek V3 系列思维链版，开源", badge: "DeepSeek", metric: "1422", metricLabel: "Arena Elo", openSource: true },
-            { name: "Mistral Large 3", desc: "欧洲开源代表，企业友好，开源", badge: "Mistral", metric: "1428", metricLabel: "Arena Elo", openSource: true },
-            { name: "Gemini-2.5-Flash", desc: "Google Flash 系列高速低成本", badge: "Google", metric: "1412", metricLabel: "Arena Elo" },
-            { name: "MAI-1-Preview", desc: "微软自研大模型", badge: "Microsoft", metric: "1398", metricLabel: "Arena Elo" },
-            { name: "Minimax-M2.7", desc: "MiniMax 旗舰，视频生成见长", badge: "MiniMax", metric: "1416", metricLabel: "Arena Elo" },
-            { name: "DeepSeek-R1", desc: "推理模型标杆，震撼开源社区，开源", badge: "DeepSeek", metric: "1373", metricLabel: "Arena Elo", openSource: true },
-            { name: "Llama-3.3-70B", desc: "Meta Llama 系列，开源生态最广", badge: "Meta", metric: "1334", metricLabel: "Arena Elo", openSource: true },
-            { name: "Qwen3-32B", desc: "可本地部署的高性能开源模型", badge: "Alibaba", metric: "1342", metricLabel: "Arena Elo", openSource: true }
+            { name: "GPT-5.5-high", desc: "OpenAI 当前综合能力最强，多模态旗舰", badge: "OpenAI", metric: "1506", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/openai/white" },
+            { name: "Claude Opus 4.7 Thinking", desc: "Anthropic 深度推理模型，长上下文处理能力突出", badge: "Anthropic", metric: "1505", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/anthropic/white" },
+            { name: "Gemini-3.1-Pro", desc: "Google 旗舰，原生多模态，搜索深度整合", badge: "Google", metric: "1505", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/google/white" },
+            { name: "Gemini-3.5-Flash", desc: "Google 高速响应模型，性价比极高", badge: "Google", metric: "1504", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/google/white" },
+            { name: "Claude Opus 4.7", desc: "Anthropic 代码与推理综合能力顶尖", badge: "Anthropic", metric: "1503", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/anthropic/white" },
+            { name: "Grok-4.20", desc: "xAI 旗舰，实时联网能力强", badge: "xAI", metric: "1496", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/xai/white" },
+            { name: "GPT-5.4-high", desc: "OpenAI GPT-5 系列高端版", badge: "OpenAI", metric: "1495", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/openai/white" },
+            { name: "Gemini-3-Pro", desc: "Google 超长上下文，深度搜索整合", badge: "Google", metric: "1492", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/google/white" },
+            { name: "Claude Opus 4.6", desc: "Anthropic 安全对齐与高性能平衡", badge: "Anthropic", metric: "1490", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/anthropic/white" },
+            { name: "Muse Spark", desc: "Meta 最新旗舰，多模态创作能力强", badge: "Meta", metric: "1489", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/meta/white" },
+            { name: "Qwen3.7-Max", desc: "阿里巴巴旗舰，中文能力最强，开源", badge: "Alibaba", metric: "1486", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/alibaba/white" },
+            { name: "Grok-4.1-Thinking", desc: "xAI 深度思维链推理模型", badge: "xAI", metric: "1482", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/xai/white" },
+            { name: "ERNIE-5.1", desc: "百度文心，中文理解与知识问答见长", badge: "Baidu", metric: "1475", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/baidu/white" },
+            { name: "DeepSeek-V4-Pro", desc: "国产开源之光，推理能力出色", badge: "DeepSeek", metric: "1467", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/deepseek/white" },
+            { name: "GLM-5.1", desc: "智谱旗舰，长文本理解能力强，开源", badge: "Z.ai", metric: "1467", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/zhipuai/white" },
+            { name: "Kimi-K2.6-Thinking", desc: "Moonshot 推理模型，超长上下文，开源", badge: "Moonshot", metric: "1466", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/moonshotai/white" },
+            { name: "Qwen3.5-Max", desc: "阿里巴巴 Qwen 系列，工具调用能力强", badge: "Alibaba", metric: "1466", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/alibaba/white" },
+            { name: "MiMo-V2.5-Pro", desc: "小米旗舰，推理与数学表现优异，开源", badge: "Xiaomi", metric: "1466", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/xiaomi/white" },
+            { name: "Seed2.0 Pro", desc: "字节跳动旗舰，多语言能力强", badge: "ByteDance", metric: "1466", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/bytedance/white" },
+            { name: "Gemini-2.5-Pro", desc: "Google 经典版本，代码能力突出", badge: "Google", metric: "1460", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/google/white" },
+            { name: "DeepSeek-R1-0528", desc: "专注推理，数学/代码顶尖，开源", badge: "DeepSeek", metric: "1426", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/deepseek/white" },
+            { name: "Hunyuan-Hy3", desc: "腾讯混元，中文创作与企业应用", badge: "Tencent", metric: "1422", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/tencentqq/white" },
+            { name: "DeepSeek-V3.2-Thinking", desc: "DeepSeek V3 系列思维链版，开源", badge: "DeepSeek", metric: "1422", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/deepseek/white" },
+            { name: "Mistral Large 3", desc: "欧洲开源代表，企业友好，开源", badge: "Mistral", metric: "1428", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/mistral/white" },
+            { name: "Gemini-2.5-Flash", desc: "Google Flash 系列高速低成本", badge: "Google", metric: "1412", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/google/white" },
+            { name: "MAI-1-Preview", desc: "微软自研大模型", badge: "Microsoft", metric: "1398", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/microsoft/white" },
+            { name: "Minimax-M2.7", desc: "MiniMax 旗舰，视频生成见长", badge: "MiniMax", metric: "1416", metricLabel: "Arena Elo", logo: "https://cdn.simpleicons.org/minimax/white" },
+            { name: "DeepSeek-R1", desc: "推理模型标杆，震撼开源社区，开源", badge: "DeepSeek", metric: "1373", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/deepseek/white" },
+            { name: "Llama-3.3-70B", desc: "Meta Llama 系列，开源生态最广", badge: "Meta", metric: "1334", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/meta/white" },
+            { name: "Qwen3-32B", desc: "可本地部署的高性能开源模型", badge: "Alibaba", metric: "1342", metricLabel: "Arena Elo", openSource: true, logo: "https://cdn.simpleicons.org/alibaba/white" }
         ];
 
         const projectsData = [
@@ -699,6 +707,7 @@
                         <div class="ranking-rank ${rankClass}">#${index + 1}</div>
                         <div class="ranking-info">
                             <div class="ranking-name">
+                                ${item.logo ? `<img class="ranking-logo" src="${item.logo}" onerror="this.style.display='none'" alt="">` : ''}
                                 ${item.name}
                                 <span class="ranking-badge">${item.badge}</span>
                             </div>
