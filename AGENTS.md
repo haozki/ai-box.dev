@@ -1,0 +1,37 @@
+# AIBOX - AI导航站
+
+## 规则
+
+- **修改前必须确认**：任何对代码、数据、样式的修改，必须先向用户说明修改方案，获得明确同意后才能执行。
+- **数据更新流程**：获取数据 → 展示给用户确认 → 确认后再写入文件。禁止静默修改。
+- **备份意识**：修改 index.html 前，先备份原文件。
+
+单文件静态站点，无需构建，无依赖，无 git。
+
+## 结构
+
+- `index.html` — 完整应用（HTML + CSS + JS 合并在一个文件中）
+- `assets/` — 参考数据源（markdown 格式的榜单资料，不被页面直接引用）
+- `.opencode/skills/` — 3 个自定义 skill（frontend / frontend-design / find-skills）
+
+## 命令
+
+无构建、无测试、无 lint。直接在浏览器中打开 `index.html` 预览。
+
+## 数据更新
+
+数据以 JS 数组嵌入在 `index.html` 底部 `<script>` 块中：
+- `modelsData` — 热门模型榜单（字段：name, desc, badge, metric, metricLabel）
+- `projectsData` — 热门项目榜单（字段：name, desc, stars, badge）
+- `agentsData` — 热门Agent榜单（字段：name, desc, badge, metric, metricLabel）
+
+更新榜单时直接编辑对应数组。`assets/*.md` 是上游参考数据，可作为编辑依据。
+
+## 设计要点
+
+- CSS 变量在 `:root` 中定义（--cyan, --magenta, --amber 等），改色改量即可
+- 深色渐变背景 + 毛玻璃导航栏 + 网格/噪点纹理
+- 排名前三使用金/银/铜渐变（.top-1/.top-2/.top-3）
+- 四个标签页通过 `switchPage()` JS 函数切换，无路由
+- 响应式断点：1024px / 768px / 480px
+- 字体：Google Fonts（Space Grotesk, JetBrains Mono, Noto Sans SC）

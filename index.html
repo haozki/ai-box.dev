@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIBOX — AI 科技导航</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00ffc8;
+            --magenta: #ff2d7b;
+            --amber: #ffb800;
+            --bg: #0a0a0c;
+            --surface: #141418;
+            --surface-raised: #1c1c22;
+            --text: #f0f0f0;
+            --text-muted: #6b6b78;
+            --border: rgba(255,255,255,0.06);
+            --glow-cyan: 0 0 40px rgba(0,255,200,0.15);
+            --glow-magenta: 0 0 40px rgba(255,45,123,0.15);
+            --font-display: 'Noto Sans SC', 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Noto Sans SC', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 网格背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 噪点纹理 */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 导航 */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10,10,12,0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--cyan);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 3px;
+        }
+
+        .nav-link {
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            letter-spacing: 0.02em;
+        }
+
+        .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+        .nav-link.active {
+            color: var(--bg);
+            background: var(--cyan);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page { display: none; }
+        .page.active {
+            display: block;
+            animation: pageReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes pageReveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== 首页 ========== */
+        .hero {
+            padding: 100px 0 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .hero-text { max-width: 600px; }
+
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cyan);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--cyan);
+        }
+
+        .hero-title {
+            font-size: clamp(42px, 5vw, 72px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .hero-title .line { display: block; }
+        .hero-title .line:first-child { color: var(--text); }
+        .hero-title .line:last-child {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--cyan);
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--cyan);
+            color: var(--bg);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .hero-cta:hover {
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--magenta));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: var(--surface-raised);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .stat-card:hover::before { opacity: 1; }
+
+        .stat-number {
+            font-family: var(--font-mono);
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .stat-number .unit {
+            font-size: 16px;
+            color: var(--cyan);
+            margin-left: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* ========== 榜单页面 ========== */
+        .ranking-header {
+            padding: 60px 0 40px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
+        .ranking-title {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ranking-title-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .ranking-update {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .ranking-scroll {
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+            padding-bottom: 40px;
+        }
+
+        .ranking-scroll::-webkit-scrollbar { width: 4px; }
+        .ranking-scroll::-webkit-scrollbar-track { background: transparent; }
+        .ranking-scroll::-webkit-scrollbar-thumb {
+            background: var(--surface-raised);
+            border-radius: 2px;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .ranking-item {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ranking-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 0;
+            background: var(--cyan);
+            border-radius: 0 2px 2px 0;
+            transition: height 0.3s ease;
+        }
+
+        .ranking-item:hover {
+            background: var(--surface-raised);
+            border-color: rgba(0,255,200,0.1);
+            transform: translateX(4px);
+        }
+
+        .ranking-item:hover::after { height: 60%; }
+
+        .ranking-rank {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .ranking-rank.top-1 { color: var(--amber); }
+        .ranking-rank.top-2 { color: #c0c0c0; }
+        .ranking-rank.top-3 { color: #cd7f32; }
+        .ranking-rank.normal { color: var(--text-muted); }
+
+        .ranking-info { min-width: 0; }
+
+        .ranking-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .ranking-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(0,255,200,0.1);
+            color: var(--cyan);
+            border: 1px solid rgba(0,255,200,0.2);
+            letter-spacing: 0.05em;
+        }
+
+        .ranking-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ranking-metrics {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .metric-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-family: var(--font-mono);
+            letter-spacing: 0.05em;
+        }
+
+        /* 榜单项入场动画 */
+        .ranking-item {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: itemReveal 0.4s ease forwards;
+        }
+        .ranking-item:nth-child(1) { animation-delay: 0.02s; }
+        .ranking-item:nth-child(2) { animation-delay: 0.04s; }
+        .ranking-item:nth-child(3) { animation-delay: 0.06s; }
+        .ranking-item:nth-child(4) { animation-delay: 0.08s; }
+        .ranking-item:nth-child(5) { animation-delay: 0.1s; }
+        .ranking-item:nth-child(6) { animation-delay: 0.12s; }
+        .ranking-item:nth-child(7) { animation-delay: 0.14s; }
+        .ranking-item:nth-child(8) { animation-delay: 0.16s; }
+        .ranking-item:nth-child(9) { animation-delay: 0.18s; }
+        .ranking-item:nth-child(10) { animation-delay: 0.2s; }
+
+        @keyframes itemReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0 40px; }
+            .hero-text { max-width: 100%; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 20px; }
+            .nav-link { padding: 8px 14px; font-size: 12px; }
+            .container { padding: 0 20px; }
+            .hero-title { letter-spacing: -1px; }
+            .hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stat-number { font-size: 28px; }
+            .ranking-header { flex-direction: column; align-items: flex-start; gap: 8px; padding: 40px 0 24px; }
+            .ranking-title { font-size: 22px; }
+            .ranking-item {
+                grid-template-columns: 44px 1fr;
+                gap: 12px;
+            }
+            .ranking-metrics { display: none; }
+            .ranking-desc { white-space: normal; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 40px 0 20px; }
+            .hero-title { font-size: 32px; }
+            .hero-stats { grid-template-columns: 1fr; }
+            .nav-container { height: 56px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-mark"></span>
+                AIBOX
+            </div>
+            <div class="nav-links">
+                <div class="nav-link active" onclick="switchPage('home', this)">首页</div>
+                <div class="nav-link" onclick="switchPage('models', this)">热门模型</div>
+                <div class="nav-link" onclick="switchPage('projects', this)">热门项目</div>
+                <div class="nav-link" onclick="switchPage('agents', this)">热门Agent</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 首页 -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <div class="hero-text">
+                    <div class="hero-eyebrow">AI TECH NAVIGATOR</div>
+                    <h1 class="hero-title">
+                        <span class="line">探索AI世界的</span>
+                        <span class="line">无限可能</span>
+                    </h1>
+                    <p class="hero-desc">
+                        汇集全球最新AI模型、开源项目与智能Agent。<br>
+                        一站式追踪人工智能领域前沿动态，告别信息过载。
+                    </p>
+                    <a class="hero-cta" onclick="switchPage('models', document.querySelectorAll('.nav-link')[1])">
+                        浏览榜单 →
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">30<span class="unit">+</span></div>
+                        <div class="stat-label">热门AI模型</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30<span class="unit">+</span></div>
+                        <div class="stat-label">开源项目</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30<span class="unit">+</span></div>
+                        <div class="stat-label">智能Agent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24<span class="unit">h</span></div>
+                        <div class="stat-label">持续更新</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 热门模型 -->
+        <div id="models" class="page">
+            <div class="ranking-header">
+                <h2 class="ranking-title">
+                    <span class="ranking-title-icon">🧠</span>
+                    热门AI模型
+                </h2>
+                <p class="ranking-update">2026.06 · Chatbot Arena Elo 评分</p>
+            </div>
+            <div class="ranking-scroll">
+                <div class="ranking-list" id="models-list"></div>
+            </div>
+        </div>
+
+        <!-- 热门项目 -->
+        <div id="projects" class="page">
+            <div class="ranking-header">
+                <h2 class="ranking-title">
+                    <span class="ranking-title-icon">📦</span>
+                    GitHub热门项目
+                </h2>
+                <p class="ranking-update">2025.06 · 按Stars排名</p>
+            </div>
+            <div class="ranking-scroll">
+                <div class="ranking-list" id="projects-list"></div>
+            </div>
+        </div>
+
+        <!-- 热门Agent -->
+        <div id="agents" class="page">
+            <div class="ranking-header">
+                <h2 class="ranking-title">
+                    <span class="ranking-title-icon">🤖</span>
+                    热门Agent
+                </h2>
+                <p class="ranking-update">2025.06 · 综合业界评测</p>
+            </div>
+            <div class="ranking-scroll">
+                <div class="ranking-list" id="agents-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modelsData = [
+            { name: "GPT-5.5-high", desc: "OpenAI 当前综合能力最强，多模态旗舰", badge: "OpenAI", metric: "1506", metricLabel: "Arena Elo" },
+            { name: "Claude Opus 4.7 Thinking", desc: "Anthropic 深度推理模型，长上下文处理能力突出", badge: "Anthropic", metric: "1505", metricLabel: "Arena Elo" },
+            { name: "Gemini-3.1-Pro", desc: "Google 旗舰，原生多模态，搜索深度整合", badge: "Google", metric: "1505", metricLabel: "Arena Elo" },
+            { name: "Gemini-3.5-Flash", desc: "Google 高速响应模型，性价比极高", badge: "Google", metric: "1504", metricLabel: "Arena Elo" },
+            { name: "Claude Opus 4.7", desc: "Anthropic 代码与推理综合能力顶尖", badge: "Anthropic", metric: "1503", metricLabel: "Arena Elo" },
+            { name: "Grok-4.20", desc: "xAI 旗舰，实时联网能力强", badge: "xAI", metric: "1496", metricLabel: "Arena Elo" },
+            { name: "GPT-5.4-high", desc: "OpenAI GPT-5 系列高端版", badge: "OpenAI", metric: "1495", metricLabel: "Arena Elo" },
+            { name: "Gemini-3-Pro", desc: "Google 超长上下文，深度搜索整合", badge: "Google", metric: "1492", metricLabel: "Arena Elo" },
+            { name: "Claude Opus 4.6", desc: "Anthropic 安全对齐与高性能平衡", badge: "Anthropic", metric: "1490", metricLabel: "Arena Elo" },
+            { name: "Muse Spark", desc: "Meta 最新旗舰，多模态创作能力强", badge: "Meta", metric: "1489", metricLabel: "Arena Elo" },
+            { name: "Qwen3.7-Max", desc: "阿里巴巴旗舰，中文能力最强，开源", badge: "Alibaba", metric: "1486", metricLabel: "Arena Elo", openSource: true },
+            { name: "Grok-4.1-Thinking", desc: "xAI 深度思维链推理模型", badge: "xAI", metric: "1482", metricLabel: "Arena Elo" },
+            { name: "ERNIE-5.1", desc: "百度文心，中文理解与知识问答见长", badge: "Baidu", metric: "1475", metricLabel: "Arena Elo" },
+            { name: "DeepSeek-V4-Pro", desc: "国产开源之光，推理能力出色", badge: "DeepSeek", metric: "1467", metricLabel: "Arena Elo", openSource: true },
+            { name: "GLM-5.1", desc: "智谱旗舰，长文本理解能力强，开源", badge: "Z.ai", metric: "1467", metricLabel: "Arena Elo", openSource: true },
+            { name: "Kimi-K2.6-Thinking", desc: "Moonshot 推理模型，超长上下文，开源", badge: "Moonshot", metric: "1466", metricLabel: "Arena Elo", openSource: true },
+            { name: "Qwen3.5-Max", desc: "阿里巴巴 Qwen 系列，工具调用能力强", badge: "Alibaba", metric: "1466", metricLabel: "Arena Elo", openSource: true },
+            { name: "MiMo-V2.5-Pro", desc: "小米旗舰，推理与数学表现优异，开源", badge: "Xiaomi", metric: "1466", metricLabel: "Arena Elo", openSource: true },
+            { name: "Seed2.0 Pro", desc: "字节跳动旗舰，多语言能力强", badge: "ByteDance", metric: "1466", metricLabel: "Arena Elo" },
+            { name: "Gemini-2.5-Pro", desc: "Google 经典版本，代码能力突出", badge: "Google", metric: "1460", metricLabel: "Arena Elo" },
+            { name: "DeepSeek-R1-0528", desc: "专注推理，数学/代码顶尖，开源", badge: "DeepSeek", metric: "1426", metricLabel: "Arena Elo", openSource: true },
+            { name: "Hunyuan-Hy3", desc: "腾讯混元，中文创作与企业应用", badge: "Tencent", metric: "1422", metricLabel: "Arena Elo" },
+            { name: "DeepSeek-V3.2-Thinking", desc: "DeepSeek V3 系列思维链版，开源", badge: "DeepSeek", metric: "1422", metricLabel: "Arena Elo", openSource: true },
+            { name: "Mistral Large 3", desc: "欧洲开源代表，企业友好，开源", badge: "Mistral", metric: "1428", metricLabel: "Arena Elo", openSource: true },
+            { name: "Gemini-2.5-Flash", desc: "Google Flash 系列高速低成本", badge: "Google", metric: "1412", metricLabel: "Arena Elo" },
+            { name: "MAI-1-Preview", desc: "微软自研大模型", badge: "Microsoft", metric: "1398", metricLabel: "Arena Elo" },
+            { name: "Minimax-M2.7", desc: "MiniMax 旗舰，视频生成见长", badge: "MiniMax", metric: "1416", metricLabel: "Arena Elo" },
+            { name: "DeepSeek-R1", desc: "推理模型标杆，震撼开源社区，开源", badge: "DeepSeek", metric: "1373", metricLabel: "Arena Elo", openSource: true },
+            { name: "Llama-3.3-70B", desc: "Meta Llama 系列，开源生态最广", badge: "Meta", metric: "1334", metricLabel: "Arena Elo", openSource: true },
+            { name: "Qwen3-32B", desc: "可本地部署的高性能开源模型", badge: "Alibaba", metric: "1342", metricLabel: "Arena Elo", openSource: true }
+        ];
+
+        const projectsData = [
+            { name: "llama.cpp", desc: "在CPU上高效运行Llama模型的C/C++实现", stars: "58.2k", badge: "推理引擎" },
+            { name: "LangChain", desc: "大语言应用开发框架，连接LLM与应用", stars: "92.1k", badge: "框架" },
+            { name: "vLLM", desc: "高吞吐和大带宽的LLM推理和服务引擎", stars: "30.5k", badge: "推理引擎" },
+            { name: "Ollama", desc: "本地运行大语言模型的简洁工具", stars: "95.3k", badge: "本地部署" },
+            { name: "ComfyUI", desc: "最强Stable Diffusion可视化界面", stars: "55.8k", badge: "图像生成" },
+            { name: "LLaMA-Factory", desc: "高效微调大语言模型的开源工具", stars: "38.6k", badge: "微调" },
+            { name: "transformers", desc: "Hugging Face开源的深度学习库", stars: "132k", badge: "框架" },
+            { name: "RVC", desc: "基于VC的实时变声转换工具", stars: "22.4k", badge: "语音" },
+            { name: "ChatGPT-Next-Web", desc: "一站式ChatGPT/LLM体验平台", stars: "95.6k", badge: "前端" },
+            { name: "Dify", desc: "LLM应用开发平台，低代码构建AI应用", stars: "52.3k", badge: "平台" },
+            { name: "LMFlow", desc: "大模型训练和推理工具库", stars: "8.2k", badge: "训练" },
+            { name: "AutoGPT", desc: "全自动GPT AI代理", stars: "160k", badge: "Agent" },
+            { name: "Stable Diffusion WebUI", desc: "开源AI图像生成工具Gradio界面", stars: "143k", badge: "图像生成" },
+            { name: "FastChat", desc: "训练、服务和评估基于LLM的聊天机器人", stars: "38.9k", badge: "框架" },
+            { name: "OpenCompass", desc: "开源大模型评测平台", stars: "12.5k", badge: "评测" },
+            { name: "Semantic Kernel", desc: "Microsoft的AI SDK集成LLM", stars: "16.8k", badge: "SDK" },
+            { name: "LlamaIndex", desc: "提供框架将LLM与传统数据源连接", stars: "35.2k", badge: "数据" },
+            { name: "Open WebUI", desc: "开源ChatGPT-style网页界面", stars: "38.1k", badge: "前端" },
+            { name: "ChatGLM", desc: "智谱AI开源的中英双语对话模型", stars: "32.6k", badge: "模型" },
+            { name: "DeepSpeed", desc: "Microsoft深度学习优化库", stars: "35.8k", badge: "训练" },
+            { name: "FasterTransformer", desc: "高速Transformer模型推理实现", stars: "10.2k", badge: "推理" },
+            { name: "Text-to-Image", desc: "Stable Diff文本生成图像模型集合", stars: "15.3k", badge: "图像" },
+            { name: "OpenInterpreter", desc: "本地运行的代码解释器", stars: "48.2k", badge: "Agent" },
+            { name: "llama.cpp (GPUPort)", desc: "GPU加速的Llama推理实现", stars: "58.2k", badge: "GPU" },
+            { name: "GPT-SoVITS", desc: "中文语音合成和变声工具", stars: "18.5k", badge: "语音" },
+            { name: "Project Discover", desc: "AI驱动的研究发现工具", stars: "9.8k", badge: "研究" },
+            { name: "Agno (原Phidata)", desc: "构建和管理AI Agent的框架", stars: "15.6k", badge: "Agent" },
+            { name: "OpenRLHF", desc: "基于RLHF的大模型训练框架", stars: "8.9k", badge: "训练" },
+            { name: "AnythingLLM", desc: "全栈AI应用平台", stars: "38.6k", badge: "平台" },
+            { name: "Chatbot-UI", desc: "ChatGPT的开源网页界面", stars: "36.2k", badge: "前端" }
+        ];
+
+        const agentsData = [
+            { name: "AutoGPT", desc: "全自动AI代理，自主完成复杂任务", badge: "自主", metric: "160k", metricLabel: "GitHub Stars" },
+            { name: "CrewAI", desc: "多代理协作框架，模拟团队工作", badge: "协作", metric: "9.5", metricLabel: "Trending" },
+            { name: "LangGraph", desc: "LangChain官方Agent框架", badge: "框架", metric: "9.4", metricLabel: "生态" },
+            { name: "AutoGen", desc: "Microsoft多对话Agent系统", badge: "多Agent", metric: "9.3", metricLabel: "业界" },
+            { name: "ChatDev", desc: "AI虚拟软件公司，团队协作开发", badge: "开发", metric: "9.2", metricLabel: "论文" },
+            { name: "MetaGPT", desc: "多Agent软件工程框架", badge: "开发", metric: "9.2", metricLabel: "GitHub" },
+            { name: "BabyAGI", desc: "概念验证AI代理原型", badge: "原型", metric: "9.0", metricLabel: "影响" },
+            { name: "SuperAGI", desc: "模块化开源AI代理框架", badge: "开源", metric: "8.9", metricLabel: "功能" },
+            { name: "LangChain Agents", desc: "LangChain生态Agent工具集", badge: "工具", metric: "8.9", metricLabel: "生态" },
+            { name: "Open Interpreter", desc: "代码解释器AI Agent", badge: "代码", metric: "8.8", metricLabel: "使用" },
+            { name: "Smithery", desc: "AI代理部署和管理平台", badge: "平台", metric: "8.7", metricLabel: "部署" },
+            { name: "AutoGen Studio", desc: "AutoGen可视化应用构建器", badge: "低代码", metric: "8.7", metricLabel: "易用" },
+            { name: "OpenBMB", desc: "开源轻量级Agent开发框架", badge: "开源", metric: "8.6", metricLabel: "社区" },
+            { name: "FlowiseAI", desc: "拖拽式AI应用构建工具", badge: "低代码", metric: "8.6", metricLabel: "可视化" },
+            { name: "CPM-Bee", desc: "开源千亿参数多模态Agent", badge: "多模态", metric: "8.5", metricLabel: "国产" },
+            { name: "Roo Code", desc: "AI编码助手，IDE内置Agent", badge: "编码", metric: "8.5", metricLabel: "工具" },
+            { name: "Ava", desc: "个人效率AI助手Agent", badge: "效率", metric: "8.4", metricLabel: "生产力" },
+            { name: "Mem0", desc: "AI代理记忆框架", badge: "记忆", metric: "8.4", metricLabel: "创新" },
+            { name: "AgentVerse", desc: "多Agent仿真和部署平台", badge: "平台", metric: "8.3", metricLabel: "研究" },
+            { name: "Dify Agent", desc: "Dify平台内嵌Agent能力", badge: "平台", metric: "8.3", metricLabel: "集成" },
+            { name: "Recurrent", desc: "AI代理任务调度系统", badge: "调度", metric: "8.2", metricLabel: "工作流" },
+            { name: "GPT Engineer", desc: "用自然语言生成完整代码项目", badge: "编程", metric: "8.2", metricLabel: "代码" },
+            { name: "Aider", desc: "GitHub上最火的AI编程助手", badge: "编程", metric: "8.1", metricLabel: "Stars" },
+            { name: "Continue", desc: "IDE原生AI编码扩展", badge: "扩展", metric: "8.1", metricLabel: "VSCode" },
+            { name: "Microsoft Copilot", desc: "微软全生态AI编码助手", badge: "商业", metric: "8.0", metricLabel: "生态" },
+            { name: "Amazon Q Developer", desc: "亚马逊AI编程助手", badge: "商业", metric: "7.9", metricLabel: "云生态" },
+            { name: "Tabnine", desc: "AI代码补全和生成工具", badge: "补全", metric: "7.9", metricLabel: "商用" },
+            { name: "Cursor", desc: "AI优先的Python代码编辑器", badge: "编辑器", metric: "7.8", metricLabel: "体验" },
+            { name: "Windsurf", desc: "新一代AI集成开发环境", badge: "IDE", metric: "7.8", metricLabel: "新兴" },
+            { name: "Devin", desc: "Cognition开发的AI软件工程师", badge: "专业", metric: "7.7", metricLabel: "评测" }
+        ];
+
+        function renderRanking(containerId, data, showMetrics = false) {
+            const container = document.getElementById(containerId);
+            let html = '';
+
+            data.forEach((item, index) => {
+                const rankClass = index < 3 ? `top-${index + 1}` : 'normal';
+
+                html += `
+                    <div class="ranking-item">
+                        <div class="ranking-rank ${rankClass}">#${index + 1}</div>
+                        <div class="ranking-info">
+                            <div class="ranking-name">
+                                ${item.name}
+                                <span class="ranking-badge">${item.badge}</span>
+                            </div>
+                            <div class="ranking-desc">${item.desc}</div>
+                        </div>
+                        <div class="ranking-metrics">
+                            <div class="metric-value">${showMetrics ? item.metric : '⭐ ' + item.stars}</div>
+                            <div class="metric-label">${showMetrics ? item.metricLabel : 'GitHub Stars'}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function switchPage(pageId, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            el.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRanking('models-list', modelsData, true);
+            renderRanking('projects-list', projectsData, false);
+            renderRanking('agents-list', agentsData, true);
+        });
+    </script>
+</body>
+</html>
