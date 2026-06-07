@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIBOX · Git History</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00ffc8;
+            --magenta: #ff2d7b;
+            --amber: #ffb800;
+            --bg: #0a0a0c;
+            --surface: #141418;
+            --surface-raised: #1c1c22;
+            --text: #f0f0f0;
+            --text-muted: #6b6b78;
+            --border: rgba(255,255,255,0.06);
+            --green: #00e676;
+            --red: #ff5252;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Noto Sans SC', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        .header-text h1 {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+        .header-text p {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyan), var(--magenta));
+            opacity: 0.3;
+        }
+        .commit {
+            position: relative;
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.5s ease forwards;
+        }
+        .commit:nth-child(1) { animation-delay: 0.1s; }
+        .commit:nth-child(2) { animation-delay: 0.25s; }
+        .commit:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .commit::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--cyan);
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 12px rgba(0,255,200,0.4);
+        }
+        .commit-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .commit-card:hover {
+            background: var(--surface-raised);
+            border-color: rgba(0,255,200,0.15);
+            transform: translateX(6px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .commit-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .commit-hash {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--cyan);
+            background: rgba(0,255,200,0.08);
+            padding: 3px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(0,255,200,0.15);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .commit-hash:hover {
+            background: rgba(0,255,200,0.15);
+        }
+        .commit-date {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .commit-msg {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .commit-files {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .file-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .file-name {
+            font-family: var(--font-mono);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .file-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .file-icon.html { background: rgba(255,152,0,0.2); color: #ff9800; }
+        .file-icon.md { background: rgba(0,255,200,0.15); color: var(--cyan); }
+        .file-icon.json { background: rgba(156,39,176,0.2); color: #ce93d8; }
+        .file-stats {
+            display: flex;
+            gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+        .file-add { color: var(--green); }
+        .file-del { color: var(--red); }
+        .commit-summary {
+            margin-top: 12px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 16px;
+        }
+        .summary-item { display: flex; align-items: center; gap: 4px; }
+        .dot-green { color: var(--green); }
+        .dot-red { color: var(--red); }
+        .dot-amber { color: var(--amber); }
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        @media (max-width: 640px) {
+            body { padding: 20px; }
+            .timeline { padding-left: 24px; }
+            .commit::before { left: -19px; width: 8px; height: 8px; }
+            .commit-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">⎇</div>
+            <div class="header-text">
+                <h1>Git History</h1>
+                <p>AIBOX · master · 3 commits</p>
+            </div>
+        </div>
+
+        <div class="timeline">
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="65bcbd94d74030fe1e63c10aec1578af3a3280e6">65bcbd9</span>
+                        <span class="commit-date">2026-06-07 23:05</span>
+                    </div>
+                    <div class="commit-msg">为热门模型添加厂商 Logo（Simple Icons CDN）</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon html">H</span> index.html</span>
+                            <span class="file-stats"><span class="file-add">+39</span><span class="file-del">-30</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 1 file changed</span>
+                        <span class="summary-item"><span class="dot-green">●</span> 39 insertions</span>
+                        <span class="summary-item"><span class="dot-red">●</span> 30 deletions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="139c22ab54a05ffc2a6dbd603ca70330f17ffe2b">139c22a</span>
+                        <span class="commit-date">2026-06-07 22:56</span>
+                    </div>
+                    <div class="commit-msg">添加自动提交规则到 AGENTS.md</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span>
+                            <span class="file-stats"><span class="file-add">+2</span><span class="file-del">-1</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 1 file changed</span>
+                        <span class="summary-item"><span class="dot-green">●</span> 2 insertions</span>
+                        <span class="summary-item"><span class="dot-red">●</span> 1 deletion</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="af4ea5c90f52c88f791363cac24a1fc81877a709">af4ea5c</span>
+                        <span class="commit-date">2026-06-07 22:55</span>
+                    </div>
+                    <div class="commit-msg">初始版本：AIBOX AI科技导航站</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon json">{}</span> .codebuddy/settings.local.json</span>
+                            <span class="file-stats"><span class="file-add">+7</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span>
+                            <span class="file-stats"><span class="file-add">+24</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span>
+                            <span class="file-stats"><span class="file-add">+37</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> assets/coding-agents.md</span>
+                            <span class="file-stats"><span class="file-add">+36</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> assets/companies.md</span>
+                            <span class="file-stats"><span class="file-add">+36</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> assets/models.md</span>
+                            <span class="file-stats"><span class="file-add">+66</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon html">H</span> index.html</span>
+                            <span class="file-stats"><span class="file-add">+732</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 7 files changed</span>
+                        <span class="summary-item"><span class="dot-green">●</span> 938 insertions</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Generated by AIBOX · 2026-06-07
+        </div>
+    </div>
+</body>
+</html>
