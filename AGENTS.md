@@ -6,6 +6,8 @@
 - **数据更新流程**：获取数据 → 展示给用户确认 → 确认后再写入文件。禁止静默修改。
 - **备份意识**：修改 index.html 前，先备份原文件。
 - **自动提交**：每次修改完成后，自动 `git add -A && git commit`，提交信息描述本次改动内容，确保可回退。
+- **会话结束更新 Git History**：每次会话结束前，重新生成 `dist/git-history.html`，确保包含最新提交记录。
+- **会话结束自动部署**：每次会话结束前，将 `dist/` 目录推送到 GitHub `gh-pages` 分支（`origin gh-pages`），使用 `git subtree split --prefix=dist` + `git push` 方式。
 
 单文件静态站点，无需构建，无依赖。使用 git 做版本管理。
 
