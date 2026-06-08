@@ -66,27 +66,13 @@
             justify-content: center;
             font-size: 22px;
         }
-        .header-text h1 {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-        }
-        .header-text p {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-        .timeline {
-            position: relative;
-            padding-left: 32px;
-        }
+        .header-text h1 { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+        .header-text p { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        .timeline { position: relative; padding-left: 32px; }
         .timeline::before {
             content: '';
             position: absolute;
-            left: 11px;
-            top: 0;
-            bottom: 0;
+            left: 11px; top: 0; bottom: 0;
             width: 2px;
             background: linear-gradient(180deg, var(--cyan), var(--magenta));
             opacity: 0.3;
@@ -98,19 +84,19 @@
             transform: translateX(-20px);
             animation: slideIn 0.5s ease forwards;
         }
-        .commit:nth-child(1) { animation-delay: 0.1s; }
-        .commit:nth-child(2) { animation-delay: 0.25s; }
-        .commit:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes slideIn {
-            to { opacity: 1; transform: translateX(0); }
-        }
+        .commit:nth-child(1) { animation-delay: 0.05s; }
+        .commit:nth-child(2) { animation-delay: 0.15s; }
+        .commit:nth-child(3) { animation-delay: 0.25s; }
+        .commit:nth-child(4) { animation-delay: 0.35s; }
+        .commit:nth-child(5) { animation-delay: 0.45s; }
+        .commit:nth-child(6) { animation-delay: 0.55s; }
+        .commit:nth-child(7) { animation-delay: 0.65s; }
+        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
         .commit::before {
             content: '';
             position: absolute;
-            left: -27px;
-            top: 20px;
-            width: 12px;
-            height: 12px;
+            left: -27px; top: 20px;
+            width: 12px; height: 12px;
             border-radius: 50%;
             background: var(--cyan);
             border: 3px solid var(--bg);
@@ -149,26 +135,10 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .commit-hash:hover {
-            background: rgba(0,255,200,0.15);
-        }
-        .commit-date {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        .commit-msg {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-        .commit-files {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
+        .commit-hash:hover { background: rgba(0,255,200,0.15); }
+        .commit-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+        .commit-msg { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; line-height: 1.5; }
+        .commit-files { display: flex; flex-direction: column; gap: 6px; }
         .file-row {
             display: flex;
             align-items: center;
@@ -186,8 +156,7 @@
             gap: 8px;
         }
         .file-icon {
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             border-radius: 3px;
             display: flex;
             align-items: center;
@@ -199,6 +168,7 @@
         .file-icon.html { background: rgba(255,152,0,0.2); color: #ff9800; }
         .file-icon.md { background: rgba(0,255,200,0.15); color: var(--cyan); }
         .file-icon.json { background: rgba(156,39,176,0.2); color: #ce93d8; }
+        .file-icon.py { background: rgba(33,150,243,0.2); color: #64b5f6; }
         .file-stats {
             display: flex;
             gap: 12px;
@@ -244,11 +214,101 @@
             <div class="header-icon">⎇</div>
             <div class="header-text">
                 <h1>Git History</h1>
-                <p>AIBOX · master · 3 commits</p>
+                <p>AIBOX · master · 7 commits</p>
             </div>
         </div>
 
         <div class="timeline">
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="e025e6163ca6e8f1cdbb97ac72effdb8464eaa5d">e025e61</span>
+                        <span class="commit-date">2026-06-08 23:02</span>
+                    </div>
+                    <div class="commit-msg">清理临时文件</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon py">P</span> temp/verify_logos.py</span>
+                            <span class="file-stats"><span class="file-del">-53</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 1 file changed</span>
+                        <span class="summary-item"><span class="dot-red">●</span> 53 deletions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="c51e08c86f3c0ae605496fd463a9404d1e27627b">c51e08c</span>
+                        <span class="commit-date">2026-06-08 23:02</span>
+                    </div>
+                    <div class="commit-msg">统一厂商图标：切换到 models.dev SVG（覆盖全部16家厂商）</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon html">H</span> index.html</span>
+                            <span class="file-stats"><span class="file-add">+38</span><span class="file-del">-58</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon py">P</span> temp/verify_logos.py</span>
+                            <span class="file-stats"><span class="file-add">+53</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 2 files changed</span>
+                        <span class="summary-item"><span class="dot-green">●</span> 91 insertions</span>
+                        <span class="summary-item"><span class="dot-red">●</span> 58 deletions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="335330215eff966b89ba55603a11f4ea49df35cd">3353302</span>
+                        <span class="commit-date">2026-06-07 23:22</span>
+                    </div>
+                    <div class="commit-msg">厂商 Logo 兜底方案：Simple Icons 失败时显示品牌色首字母</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon html">H</span> index.html</span>
+                            <span class="file-stats"><span class="file-add">+32</span><span class="file-del">-4</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 1 file changed</span>
+                        <span class="summary-item"><span class="dot-green">●</span> 32 insertions</span>
+                        <span class="summary-item"><span class="dot-red">●</span> 4 deletions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commit">
+                <div class="commit-card">
+                    <div class="commit-top">
+                        <span class="commit-hash" title="6af4d9a98fc466de71558342112b77afa5e33b08">6af4d9a</span>
+                        <span class="commit-date">2026-06-07 23:11</span>
+                    </div>
+                    <div class="commit-msg">新增 Git 变更历史查看页面</div>
+                    <div class="commit-files">
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span>
+                            <span class="file-stats"><span class="file-add">+3</span></span>
+                        </div>
+                        <div class="file-row">
+                            <span class="file-name"><span class="file-icon html">H</span> git-history.html</span>
+                            <span class="file-stats"><span class="file-add">+346</span></span>
+                        </div>
+                    </div>
+                    <div class="commit-summary">
+                        <span class="summary-item"><span class="dot-amber">●</span> 2 files changed</span>
+                        <span class="summary-item"><span class="dot-green">●</span> 349 insertions</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="commit">
                 <div class="commit-card">
@@ -339,7 +399,7 @@
         </div>
 
         <div class="footer">
-            Generated by AIBOX · 2026-06-07
+            Generated by AIBOX · 2026-06-08
         </div>
     </div>
 </body>
