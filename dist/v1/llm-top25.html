@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大模型综合能力 Top 25</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; }
+.page { padding: 24px; }
+.header { text-align: center; margin-bottom: 24px; }
+.header h1 { font-size: 24px; color: #58a6ff; margin-bottom: 8px; }
+.header p { font-size: 13px; color: #8b949e; max-width: 720px; margin: 0 auto; line-height: 1.6; }
+.table-wrap { max-width: 960px; margin: 0 auto; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { background: #161b22; color: #8b949e; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 10px; text-align: left; position: sticky; top: 0; }
+th:first-child { border-radius: 8px 0 0 0; }
+th:last-child { border-radius: 0 8px 0 0; }
+td { padding: 10px 10px; border-bottom: 1px solid #21262d; font-size: 13px; vertical-align: middle; }
+tr:hover { background: #161b22; }
+.rank { font-weight: 700; color: #8b949e; text-align: center; width: 32px; }
+.rank.gold { color: #f0883e; font-size: 16px; }
+.rank.silver { color: #e3b341; font-size: 15px; }
+.rank.bronze { color: #db6d28; font-size: 15px; }
+.model-cell { display: flex; align-items: center; gap: 10px; min-width: 200px; }
+.logo { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: #fff; }
+.model-name { font-weight: 600; color: #c9d1d9; white-space: nowrap; font-size: 13px; }
+.model-company { font-size: 11px; color: #8b949e; }
+.score { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bar { display: inline-block; height: 4px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+.hi { background: #3fb950; }
+.md { background: #e3b341; }
+.lo { background: #f85149; }
+.na { color: #484f58; }
+.tag { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 8px; font-weight: 600; margin-left: 4px; vertical-align: middle; }
+.tag-new { background: #1f3a2e; color: #3fb950; }
+.tag-open { background: #1a2332; color: #58a6ff; }
+.footer { text-align: center; margin-top: 20px; font-size: 12px; color: #8b949e; }
+.footer a { color: #58a6ff; text-decoration: none; }
+.note { max-width: 960px; margin: 20px auto 0; padding: 14px 16px; background: #161b22; border-radius: 8px; border: 1px solid #21262d; }
+.note h3 { font-size: 13px; color: #e3b341; margin-bottom: 6px; }
+.note ul { font-size: 12px; color: #8b949e; padding-left: 16px; line-height: 1.8; }
+.note li strong { color: #c9d1d9; }
+</style>
+</head>
+<body>
+<script src="nav.js"></script>
+
+<div class="page">
+<div class="header">
+  <h1>🏆 2026 通用大模型综合能力 Top 25</h1>
+  <p>综合排名依据：HLE（综合最难考试）· GPQA Diamond（研究生推理）· SWE-Bench（代码工程）· AIME 2025（数学）· ARC-AGI 2（视觉推理）</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>模型</th>
+  <th style="text-align:center">HLE</th>
+  <th style="text-align:center">GPQA</th>
+  <th style="text-align:center">SWE</th>
+  <th style="text-align:center">AIME</th>
+  <th style="text-align:center">ARC-AGI</th>
+  <th style="text-align:center">上下文</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- 1 -->
+<tr>
+  <td class="rank gold">1</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Opus 4.8 <span class="tag tag-new">NEW</span></div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score"><span class="bar hi" style="width:58px"></span>57.9%</td>
+  <td class="score"><span class="bar hi" style="width:94px"></span>93.6%</td>
+  <td class="score"><span class="bar hi" style="width:89px"></span>88.6%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 2 -->
+<tr>
+  <td class="rank silver">2</td>
+  <td><div class="model-cell"><div class="logo" style="background:#4285f4">G</div><div><div class="model-name">Gemini 3 Pro <span class="tag tag-new">NEW</span></div><div class="model-company">Google DeepMind</div></div></div></td>
+  <td class="score"><span class="bar md" style="width:46px"></span>45.8%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:100px"></span>100%</td>
+  <td class="score na">—</td>
+  <td class="score">10M</td>
+</tr>
+
+<!-- 3 -->
+<tr>
+  <td class="rank bronze">3</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT-5.5 <span class="tag tag-new">NEW</span></div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score"><span class="bar md" style="width:41px"></span>41.4%</td>
+  <td class="score"><span class="bar hi" style="width:94px"></span>93.6%</td>
+  <td class="score"><span class="bar md" style="width:59px"></span>58.6%</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:85px"></span>85%</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 4 -->
+<tr>
+  <td class="rank">4</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT-5.5 Pro <span class="tag tag-new">NEW</span></div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score"><span class="bar md" style="width:43px"></span>43.1%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 5 -->
+<tr>
+  <td class="rank">5</td>
+  <td><div class="model-cell"><div class="logo" style="background:#7c3aed">K</div><div><div class="model-name">Kimi K2 Thinking <span class="tag tag-new">NEW</span></div><div class="model-company">Moonshot AI</div></div></div></td>
+  <td class="score"><span class="bar md" style="width:45px"></span>44.9%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:99px"></span>99.1%</td>
+  <td class="score na">—</td>
+  <td class="score">256K</td>
+</tr>
+
+<!-- 6 -->
+<tr>
+  <td class="rank">6</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT 5.2</div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:92px"></span>92.4%</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:100px"></span>100%</td>
+  <td class="score"><span class="bar md" style="width:53px"></span>52.9%</td>
+  <td class="score">400K</td>
+</tr>
+
+<!-- 7 -->
+<tr>
+  <td class="rank">7</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Opus 4.7</div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:94px"></span>94.2%</td>
+  <td class="score"><span class="bar hi" style="width:88px"></span>87.6%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 8 -->
+<tr>
+  <td class="rank">8</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Opus 4.6</div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:91px"></span>91.1%</td>
+  <td class="score"><span class="bar hi" style="width:81px"></span>80.8%</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar md" style="width:69px"></span>68.8%</td>
+  <td class="score">200K</td>
+</tr>
+
+<!-- 9 -->
+<tr>
+  <td class="rank">9</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Sonnet 4.6</div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:89px"></span>89.3%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar md" style="width:58px"></span>58.3%</td>
+  <td class="score">200K</td>
+</tr>
+
+<!-- 10 -->
+<tr>
+  <td class="rank">10</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Sonnet 4.5</div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:82px"></span>82%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">200K</td>
+</tr>
+
+<!-- 11 -->
+<tr>
+  <td class="rank">11</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Opus 4.5</div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:91px"></span>90.8%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar lo" style="width:38px"></span>37.6%</td>
+  <td class="score">200K</td>
+</tr>
+
+<!-- 12 -->
+<tr>
+  <td class="rank">12</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT-5 <span class="tag tag-open">OPEN</span></div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">400K</td>
+</tr>
+
+<!-- 13 -->
+<tr>
+  <td class="rank">13</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT-4.1</div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 14 -->
+<tr>
+  <td class="rank">14</td>
+  <td><div class="model-cell"><div class="logo" style="background:#4285f4">G</div><div><div class="model-name">Gemini 2.5 Pro</div><div class="model-company">Google DeepMind</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 15 -->
+<tr>
+  <td class="rank">15</td>
+  <td><div class="model-cell"><div class="logo" style="background:#ef4444">D</div><div><div class="model-name">DeepSeek-R1 <span class="tag tag-open">OPEN</span></div><div class="model-company">DeepSeek</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">128K</td>
+</tr>
+
+<!-- 16 -->
+<tr>
+  <td class="rank">16</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT-oss-120b <span class="tag tag-open">OPEN</span></div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">131K</td>
+</tr>
+
+<!-- 17 -->
+<tr>
+  <td class="rank">17</td>
+  <td><div class="model-cell"><div class="logo" style="background:#1877f2">M</div><div><div class="model-name">Llama 4 Maverick <span class="tag tag-open">OPEN</span></div><div class="model-company">Meta</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">10M</td>
+</tr>
+
+<!-- 18 -->
+<tr>
+  <td class="rank">18</td>
+  <td><div class="model-cell"><div class="logo" style="background:#1877f2">M</div><div><div class="model-name">Llama 4 Scout <span class="tag tag-open">OPEN</span></div><div class="model-company">Meta</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">10M</td>
+</tr>
+
+<!-- 19 -->
+<tr>
+  <td class="rank">19</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT-oss-20b <span class="tag tag-open">OPEN</span></div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:99px"></span>98.7%</td>
+  <td class="score na">—</td>
+  <td class="score">131K</td>
+</tr>
+
+<!-- 20 -->
+<tr>
+  <td class="rank">20</td>
+  <td><div class="model-cell"><div class="logo" style="background:#4285f4">G</div><div><div class="model-name">Gemini 2.5 Flash</div><div class="model-company">Google DeepMind</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">1M</td>
+</tr>
+
+<!-- 21 -->
+<tr>
+  <td class="rank">21</td>
+  <td><div class="model-cell"><div class="logo" style="background:#d4a574">A</div><div><div class="model-name">Claude Opus 4.1</div><div class="model-company">Anthropic</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score"><span class="bar hi" style="width:90px"></span>89.5%</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">200K</td>
+</tr>
+
+<!-- 22 -->
+<tr>
+  <td class="rank">22</td>
+  <td><div class="model-cell"><div class="logo" style="background:#10a37f">O</div><div><div class="model-name">GPT 5.1</div><div class="model-company">OpenAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">200K</td>
+</tr>
+
+<!-- 23 -->
+<tr>
+  <td class="rank">23</td>
+  <td><div class="model-cell"><div class="logo" style="background:#ef4444">D</div><div><div class="model-name">DeepSeek V3 <span class="tag tag-open">OPEN</span></div><div class="model-company">DeepSeek</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">128K</td>
+</tr>
+
+<!-- 24 -->
+<tr>
+  <td class="rank">24</td>
+  <td><div class="model-cell"><div class="logo" style="background:#1d4ed8">Q</div><div><div class="model-name">Qwen3.5 <span class="tag tag-open">OPEN</span></div><div class="model-company">Alibaba Cloud</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">128K</td>
+</tr>
+
+<!-- 25 -->
+<tr>
+  <td class="rank">25</td>
+  <td><div class="model-cell"><div class="logo" style="background:#1d1d1d">x</div><div><div class="model-name">Grok 3</div><div class="model-company">xAI</div></div></div></td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score na">—</td>
+  <td class="score">128K</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="note">
+  <h3>📊 排名依据说明</h3>
+  <ul>
+    <li><strong>HLE (Humanity's Last Exam)</strong> — 跨学科极难考试，目前最权威的综合能力指标（首要）</li>
+    <li><strong>GPQA Diamond</strong> — 研究生级物理/化学/生物推理</li>
+    <li><strong>SWE-Bench</strong> — 真实 GitHub Issue 代码修复（Agent 编码能力）</li>
+    <li><strong>AIME 2025</strong> — 美国数学邀请赛多步推理</li>
+    <li><strong>ARC-AGI 2</strong> — 抽象视觉推理（流体智力）</li>
+    <li>— 表示该基准测试暂无公开数据</li>
+    <li><span class="tag tag-open" style="font-size:10px">OPEN</span> 表示开源/开放权重模型</li>
+  </ul>
+</div>
+
+</div>
+
+<div class="footer">
+  数据来源：<a href="https://www.vellum.ai/llm-leaderboard" target="_blank">Vellum LLM Leaderboard</a> · <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank">Artificial Analysis</a> · 更新：2026-06
+</div>
+
+</body>
+</html>
