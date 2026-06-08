@@ -11,13 +11,16 @@
 
 ## 结构
 
-- `index.html` — 完整应用（HTML + CSS + JS 合并在一个文件中）
+- `dist/` — 部署目录（直接上传到网站服务器）
+  - `dist/index.html` — 完整应用（HTML + CSS + JS 合并在一个文件中）
+  - `dist/git-history.html` — Git 变更历史查看页
 - `assets/` — 参考数据源（markdown 格式的榜单资料，不被页面直接引用）
-- `.opencode/skills/` — 3 个自定义 skill（frontend / frontend-design / find-skills）
+- `.workbuddy/` — 项目记忆和规则
+- `AGENTS.md` — 项目级规则文件
 
 ## 命令
 
-无构建、无测试、无 lint。直接在浏览器中打开 `index.html` 预览。
+无构建、无测试、无 lint。直接在浏览器中打开 `dist/index.html` 预览。
 
 ## 数据更新
 
