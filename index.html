@@ -534,7 +534,6 @@
                 <div class="nav-link active" onclick="switchPage('home', this)">首页</div>
                 <div class="nav-link" onclick="switchPage('models', this)">热门模型</div>
                 <div class="nav-link" onclick="switchPage('projects', this)">热门项目</div>
-                <div class="nav-link" onclick="switchPage('agents', this)">热门Agent</div>
             </div>
         </div>
     </nav>
@@ -641,20 +640,6 @@
                 <div id="proj-audio" class="sub-page"><div class="ranking-list" id="audio-list"></div></div>
                 <div id="proj-frontend" class="sub-page"><div class="ranking-list" id="frontend-list"></div></div>
                 <div id="proj-eval" class="sub-page"><div class="ranking-list" id="eval-list"></div></div>
-            </div>
-        </div>
-
-        <!-- 热门Agent -->
-        <div id="agents" class="page">
-            <div class="ranking-header">
-                <h2 class="ranking-title">
-                    <span class="ranking-title-icon">🤖</span>
-                    热门Agent
-                </h2>
-                <p class="ranking-update">2025.06 · 综合业界评测</p>
-            </div>
-            <div class="ranking-scroll">
-                <div class="ranking-list" id="agents-list"></div>
             </div>
         </div>
     </div>
@@ -987,39 +972,6 @@
             { name: "EvalScope", desc: "阿里 ModelScope 评测框架", badge: "Python", stars: "2.9k" }
         ];
 
-        const agentsData = [
-            { name: "AutoGPT", desc: "全自动AI代理，自主完成复杂任务", badge: "自主", metric: "160k", metricLabel: "GitHub Stars" },
-            { name: "CrewAI", desc: "多代理协作框架，模拟团队工作", badge: "协作", metric: "9.5", metricLabel: "Trending" },
-            { name: "LangGraph", desc: "LangChain官方Agent框架", badge: "框架", metric: "9.4", metricLabel: "生态" },
-            { name: "AutoGen", desc: "Microsoft多对话Agent系统", badge: "多Agent", metric: "9.3", metricLabel: "业界" },
-            { name: "ChatDev", desc: "AI虚拟软件公司，团队协作开发", badge: "开发", metric: "9.2", metricLabel: "论文" },
-            { name: "MetaGPT", desc: "多Agent软件工程框架", badge: "开发", metric: "9.2", metricLabel: "GitHub" },
-            { name: "BabyAGI", desc: "概念验证AI代理原型", badge: "原型", metric: "9.0", metricLabel: "影响" },
-            { name: "SuperAGI", desc: "模块化开源AI代理框架", badge: "开源", metric: "8.9", metricLabel: "功能" },
-            { name: "LangChain Agents", desc: "LangChain生态Agent工具集", badge: "工具", metric: "8.9", metricLabel: "生态" },
-            { name: "Open Interpreter", desc: "代码解释器AI Agent", badge: "代码", metric: "8.8", metricLabel: "使用" },
-            { name: "Smithery", desc: "AI代理部署和管理平台", badge: "平台", metric: "8.7", metricLabel: "部署" },
-            { name: "AutoGen Studio", desc: "AutoGen可视化应用构建器", badge: "低代码", metric: "8.7", metricLabel: "易用" },
-            { name: "OpenBMB", desc: "开源轻量级Agent开发框架", badge: "开源", metric: "8.6", metricLabel: "社区" },
-            { name: "FlowiseAI", desc: "拖拽式AI应用构建工具", badge: "低代码", metric: "8.6", metricLabel: "可视化" },
-            { name: "CPM-Bee", desc: "开源千亿参数多模态Agent", badge: "多模态", metric: "8.5", metricLabel: "国产" },
-            { name: "Roo Code", desc: "AI编码助手，IDE内置Agent", badge: "编码", metric: "8.5", metricLabel: "工具" },
-            { name: "Ava", desc: "个人效率AI助手Agent", badge: "效率", metric: "8.4", metricLabel: "生产力" },
-            { name: "Mem0", desc: "AI代理记忆框架", badge: "记忆", metric: "8.4", metricLabel: "创新" },
-            { name: "AgentVerse", desc: "多Agent仿真和部署平台", badge: "平台", metric: "8.3", metricLabel: "研究" },
-            { name: "Dify Agent", desc: "Dify平台内嵌Agent能力", badge: "平台", metric: "8.3", metricLabel: "集成" },
-            { name: "Recurrent", desc: "AI代理任务调度系统", badge: "调度", metric: "8.2", metricLabel: "工作流" },
-            { name: "GPT Engineer", desc: "用自然语言生成完整代码项目", badge: "编程", metric: "8.2", metricLabel: "代码" },
-            { name: "Aider", desc: "GitHub上最火的AI编程助手", badge: "编程", metric: "8.1", metricLabel: "Stars" },
-            { name: "Continue", desc: "IDE原生AI编码扩展", badge: "扩展", metric: "8.1", metricLabel: "VSCode" },
-            { name: "Microsoft Copilot", desc: "微软全生态AI编码助手", badge: "商业", metric: "8.0", metricLabel: "生态" },
-            { name: "Amazon Q Developer", desc: "亚马逊AI编程助手", badge: "商业", metric: "7.9", metricLabel: "云生态" },
-            { name: "Tabnine", desc: "AI代码补全和生成工具", badge: "补全", metric: "7.9", metricLabel: "商用" },
-            { name: "Cursor", desc: "AI优先的Python代码编辑器", badge: "编辑器", metric: "7.8", metricLabel: "体验" },
-            { name: "Windsurf", desc: "新一代AI集成开发环境", badge: "IDE", metric: "7.8", metricLabel: "新兴" },
-            { name: "Devin", desc: "Cognition开发的AI软件工程师", badge: "专业", metric: "7.7", metricLabel: "评测" }
-        ];
-
         function renderRanking(containerId, data, showMetrics = false) {
             const container = document.getElementById(containerId);
             let html = '';
@@ -1090,7 +1042,6 @@
             renderRanking('audio-list', audioData, false);
             renderRanking('frontend-list', frontendData, false);
             renderRanking('eval-list', evalData, false);
-            renderRanking('agents-list', agentsData, true);
         });
     </script>
 </body>
