@@ -616,10 +616,31 @@
                     <span class="ranking-title-icon">📦</span>
                     GitHub热门项目
                 </h2>
-                <p class="ranking-update">2025.06 · 按Stars排名</p>
+                <p class="ranking-update">2026.06 · 按 Stars 排名</p>
+            </div>
+            <div class="sub-nav" style="flex-wrap:wrap">
+                <div class="sub-nav-link active" onclick="switchProjTab('default', this)">默认</div>
+                <div class="sub-nav-link" onclick="switchProjTab('inference', this)">推理引擎</div>
+                <div class="sub-nav-link" onclick="switchProjTab('framework', this)">LLM框架</div>
+                <div class="sub-nav-link" onclick="switchProjTab('coding', this)">编程Agent</div>
+                <div class="sub-nav-link" onclick="switchProjTab('agent', this)">通用Agent</div>
+                <div class="sub-nav-link" onclick="switchProjTab('training', this)">微调训练</div>
+                <div class="sub-nav-link" onclick="switchProjTab('image', this)">图像生成</div>
+                <div class="sub-nav-link" onclick="switchProjTab('audio', this)">语音音频</div>
+                <div class="sub-nav-link" onclick="switchProjTab('frontend', this)">前端界面</div>
+                <div class="sub-nav-link" onclick="switchProjTab('eval', this)">评测工具</div>
             </div>
             <div class="ranking-scroll">
-                <div class="ranking-list" id="projects-list"></div>
+                <div id="proj-default" class="sub-page active"><div class="ranking-list" id="projects-list"></div></div>
+                <div id="proj-inference" class="sub-page"><div class="ranking-list" id="inference-list"></div></div>
+                <div id="proj-framework" class="sub-page"><div class="ranking-list" id="framework-list"></div></div>
+                <div id="proj-coding" class="sub-page"><div class="ranking-list" id="coding-list"></div></div>
+                <div id="proj-agent" class="sub-page"><div class="ranking-list" id="agent-list"></div></div>
+                <div id="proj-training" class="sub-page"><div class="ranking-list" id="training-list"></div></div>
+                <div id="proj-image" class="sub-page"><div class="ranking-list" id="image-list"></div></div>
+                <div id="proj-audio" class="sub-page"><div class="ranking-list" id="audio-list"></div></div>
+                <div id="proj-frontend" class="sub-page"><div class="ranking-list" id="frontend-list"></div></div>
+                <div id="proj-eval" class="sub-page"><div class="ranking-list" id="eval-list"></div></div>
             </div>
         </div>
 
@@ -804,6 +825,168 @@
             { name: "Chatbot-UI", desc: "ChatGPT的开源网页界面", stars: "36.2k", badge: "前端" }
         ];
 
+        const inferenceData = [
+            { name: "ollama", desc: "本地运行 LLM 的最简工具", badge: "Go", stars: "173.5k" },
+            { name: "llama.cpp", desc: "CPU 高效推理，GGUF 格式标准", badge: "C++", stars: "115.1k" },
+            { name: "vllm", desc: "高吞吐 LLM 推理和服务引擎", badge: "Python", stars: "82.1k" },
+            { name: "gpt4all", desc: "任意设备本地运行 LLM", badge: "C++", stars: "77.4k" },
+            { name: "LocalAI", desc: "开源 AI 引擎，兼容 OpenAI API", badge: "Go", stars: "46.7k" },
+            { name: "llamafile", desc: "单文件分发，跨平台即运行", badge: "C++", stars: "43.2k" },
+            { name: "sglang", desc: "高效 LLM 推理框架", badge: "Python", stars: "28.9k" },
+            { name: "MLC-LLM", desc: "跨平台通用 LLM 部署引擎", badge: "Python", stars: "20.1k" },
+            { name: "web-llm", desc: "浏览器内高性能 LLM 推理", badge: "TS", stars: "18.2k" },
+            { name: "MNN", desc: "阿里巴巴轻量级推理引擎", badge: "C++", stars: "15.5k" },
+            { name: "TGI", desc: "Hugging Face 官方推理服务", badge: "Rust", stars: "10.8k" },
+            { name: "TensorRT-LLM", desc: "NVIDIA GPU 优化推理", badge: "C++", stars: "10.5k" },
+            { name: "Xinference", desc: "轻量级 LLM 推理平台", badge: "Python", stars: "6.2k" },
+            { name: "gpustack", desc: "GPU 集群管理与推理编排", badge: "Python", stars: "5.1k" },
+            { name: "DeepSpeed-MII", desc: "微软高性能推理库", badge: "Python", stars: "4.8k" }
+        ];
+
+        const frameworkData = [
+            { name: "dify", desc: "生产级 Agentic 工作流平台", badge: "TS", stars: "144.3k" },
+            { name: "langchain", desc: "Agent 工程平台，LLM 应用事实标准", badge: "Python", stars: "138.7k" },
+            { name: "Langflow", desc: "可视化 LLM 应用构建器", badge: "Python", stars: "63.0k" },
+            { name: "crewAI", desc: "多 Agent 角色扮演协作框架", badge: "Python", stars: "53.1k" },
+            { name: "llama_index", desc: "文档 Agent 平台，RAG 领先框架", badge: "Python", stars: "50.0k" },
+            { name: "langgraph", desc: "LangChain 官方 Agent 框架", badge: "Python", stars: "34.1k" },
+            { name: "openai-agents-python", desc: "OpenAI 官方多 Agent 框架", badge: "Python", stars: "27.0k" },
+            { name: "haystack", desc: "开源 AI 编排框架", badge: "Python", stars: "25.5k" },
+            { name: "mastra", desc: "TypeScript AI Agent 框架", badge: "TS", stars: "24.9k" },
+            { name: "Semantic Kernel", desc: "微软 AI SDK，企业级集成", badge: "C#", stars: "24.8k" },
+            { name: "DSPy", desc: "斯坦福编程式 LLM 优化框架", badge: "Python", stars: "22.6k" },
+            { name: "phidata", desc: "Agent 构建与管理框架", badge: "Python", stars: "21.3k" },
+            { name: "mem0", desc: "AI Agent 记忆层框架", badge: "Python", stars: "28.5k" },
+            { name: "FlowiseAI", desc: "拖拽式 LLM 应用构建", badge: "TS", stars: "36.8k" },
+            { name: "12-factor-agents", desc: "LLM Agent 构建原则", badge: "TS", stars: "23.2k" }
+        ];
+
+        const codingData = [
+            { name: "Claude Code", desc: "Anthropic 终端编程 Agent，深度推理", badge: "Anthropic", metric: "50k+", metricLabel: "Stars" },
+            { name: "Cursor", desc: "AI 优先 IDE，Agent 模式强大", badge: "商业", metric: "-", metricLabel: "" },
+            { name: "GitHub Copilot", desc: "微软/GitHub，VS Code 深度集成", badge: "Microsoft", metric: "-", metricLabel: "" },
+            { name: "OpenAI Codex", desc: "OpenAI CLI 编程 Agent", badge: "OpenAI", metric: "30k+", metricLabel: "Stars" },
+            { name: "Windsurf", desc: "Codeium 出品，AI 集成开发环境", badge: "商业", metric: "-", metricLabel: "" },
+            { name: "Devin", desc: "Cognition AI 软件工程师 Agent", badge: "商业", metric: "-", metricLabel: "" },
+            { name: "aider", desc: "终端 AI 结对编程，支持多模型", badge: "开源", metric: "45.9k", metricLabel: "Stars" },
+            { name: "OpenCode", desc: "开源终端编程 Agent", badge: "开源", metric: "15k+", metricLabel: "Stars" },
+            { name: "Trae", desc: "字节跳动 AI IDE", badge: "ByteDance", metric: "-", metricLabel: "" },
+            { name: "CodeBuddy", desc: "腾讯 AI 编程助手", badge: "Tencent", metric: "-", metricLabel: "" },
+            { name: "Continue", desc: "VS Code/JetBrains AI 扩展", badge: "开源", metric: "22.5k", metricLabel: "Stars" },
+            { name: "Cline", desc: "VS Code 自主编码 Agent", badge: "开源", metric: "35k+", metricLabel: "Stars" },
+            { name: "Roo Code", desc: "VS Code 多模式编程 Agent", badge: "开源", metric: "15k+", metricLabel: "Stars" },
+            { name: "Amazon Q", desc: "亚马逊 AI 编程助手", badge: "Amazon", metric: "-", metricLabel: "" },
+            { name: "Augment Code", desc: "企业级 AI 编程平台", badge: "商业", metric: "-", metricLabel: "" }
+        ];
+
+        const agentGenData = [
+            { name: "AutoGPT", desc: "全自动 AI Agent 先驱", badge: "Python", stars: "184.8k" },
+            { name: "MetaGPT", desc: "多 Agent 软件公司框架", badge: "Python", stars: "68.6k" },
+            { name: "Open Interpreter", desc: "本地代码解释器 Agent", badge: "Python", stars: "58.2k" },
+            { name: "crewAI", desc: "多 Agent 角色扮演协作", badge: "Python", stars: "53.1k" },
+            { name: "Cherry Studio", desc: "AI 生产力工作室", badge: "TS", stars: "47.1k" },
+            { name: "AgentGPT", desc: "浏览器内自主 Agent 部署", badge: "TS", stars: "36.2k" },
+            { name: "khoj", desc: "AI 第二大脑，自主知识助手", badge: "Python", stars: "35.0k" },
+            { name: "OpenClaw", desc: "全自主 AI 个人助手基础设施", badge: "Rust", stars: "31.8k" },
+            { name: "gpt-researcher", desc: "自主深度研究 Agent", badge: "Python", stars: "27.6k" },
+            { name: "AgenticSeek", desc: "本地 Manus AI，无需 API", badge: "Python", stars: "26.5k" },
+            { name: "ChatDev", desc: "AI 虚拟软件公司", badge: "Python", stars: "26.1k" },
+            { name: "BabyAGI", desc: "任务驱动自主 Agent 原型", badge: "Python", stars: "21.3k" },
+            { name: "SuperAGI", desc: "模块化开源 Agent 框架", badge: "Python", stars: "15.6k" },
+            { name: "Hermes", desc: "Nous Research Agent 模型", badge: "Python", stars: "5k+" },
+            { name: "Camel", desc: "多 Agent 社会模拟框架", badge: "Python", stars: "8.5k" }
+        ];
+
+        const trainingData = [
+            { name: "transformers", desc: "Hugging Face ML 事实标准库", badge: "Python", stars: "161.4k" },
+            { name: "LLMs-from-scratch", desc: "从零实现 ChatGPT 教程", badge: "Jupyter", stars: "96.8k" },
+            { name: "LLaMA-Factory", desc: "100+ LLM/VLM 统一微调框架", badge: "Python", stars: "72.0k" },
+            { name: "unsloth", desc: "2-5x 加速微调，省 70% 显存", badge: "Python", stars: "66.0k" },
+            { name: "ColossalAI", desc: "大规模分布式训练框架", badge: "Python", stars: "40.2k" },
+            { name: "DeepSpeed", desc: "微软深度学习训练优化库", badge: "Python", stars: "38.5k" },
+            { name: "litgpt", desc: "Lightning AI LLM 训练框架", badge: "Python", stars: "11.2k" },
+            { name: "OpenRLHF", desc: "RLHF 大模型训练框架", badge: "Python", stars: "12.5k" },
+            { name: "Axolotl", desc: "简化 LLM 微调的工具", badge: "Python", stars: "9.8k" },
+            { name: "LMFlow", desc: "大模型训练推理工具库", badge: "Python", stars: "8.2k" },
+            { name: "Firefly", desc: "中文 LLM 微调工具", badge: "Python", stars: "8.2k" },
+            { name: "Liger-Kernel", desc: "LinkedIn 高效 Triton 内核", badge: "Python", stars: "6.4k" },
+            { name: "Swift", desc: "阿里 ModelScope 微调框架", badge: "Python", stars: "6.8k" },
+            { name: "XTuner", desc: "上海 AI Lab 轻量微调工具", badge: "Python", stars: "5.1k" },
+            { name: "MegaScale", desc: "万卡集群训练框架", badge: "Python", stars: "4.5k" }
+        ];
+
+        const imageData = [
+            { name: "Stable Diffusion WebUI", desc: "SD 最流行 Web 界面", badge: "Python", stars: "143k+" },
+            { name: "ComfyUI", desc: "节点式 SD 工作流，专业级", badge: "Python", stars: "85k+" },
+            { name: "Fooocus", desc: "一键出图，极简 SD 界面", badge: "Python", stars: "45k+" },
+            { name: "diffusers", desc: "Hugging Face 扩散模型库", badge: "Python", stars: "33.8k" },
+            { name: "InvokeAI", desc: "专业创意 AI 图像生成平台", badge: "Python", stars: "25k+" },
+            { name: "flux", desc: "Black Forest Labs FLUX 模型", badge: "Python", stars: "20k+" },
+            { name: "PhotoMaker", desc: "腾讯 ARC 照片级人物生成", badge: "Python", stars: "12k+" },
+            { name: "kohya_ss", desc: "SD 模型训练/LoRA 工具", badge: "Python", stars: "12k+" },
+            { name: "SD-WebUI-Forge", desc: "Forge 优化版，性能更强", badge: "Python", stars: "12k+" },
+            { name: "FaceChain", desc: "阿里 ModelScope 数字分身", badge: "Python", stars: "10k+" },
+            { name: "CogView4", desc: "智谱 AI 文生图模型", badge: "Python", stars: "8k+" },
+            { name: "IC-Light", desc: "可控光照操纵", badge: "Python", stars: "7k+" },
+            { name: "IP-Adapter", desc: "腾讯 AI Lab 图像适配器", badge: "Python", stars: "5k+" },
+            { name: "InstantMesh", desc: "腾讯 ARC 3D 网格生成", badge: "Python", stars: "5k+" },
+            { name: "Impact-Pack", desc: "ComfyUI 检测/分割增强包", badge: "Python", stars: "8k+" }
+        ];
+
+        const audioData = [
+            { name: "whisper.cpp", desc: "OpenAI Whisper C++ 移植，语音识别", badge: "C++", stars: "50.5k" },
+            { name: "Whisper", desc: "OpenAI 语音识别模型", badge: "Python", stars: "75k+" },
+            { name: "GPT-SoVITS", desc: "中文语音合成/变声，少样本", badge: "Python", stars: "42k+" },
+            { name: "TTS", desc: "Coqui 深度学习语音合成", badge: "Python", stars: "35k+" },
+            { name: "Bark", desc: "Suno 文本转语音，支持多语言", badge: "Python", stars: "35k+" },
+            { name: "ChatTTS", desc: "对话场景 TTS，自然流畅", badge: "Python", stars: "33k+" },
+            { name: "OpenVoice", desc: "MyShell 即时语音克隆", badge: "Python", stars: "30k+" },
+            { name: "RVC", desc: "实时变声转换", badge: "Python", stars: "25k+" },
+            { name: "Fish-Speech", desc: "高质量零样本语音合成", badge: "Python", stars: "18k+" },
+            { name: "voice-pro", desc: "Gradio 语音创作 WebUI", badge: "Python", stars: "10.8k" },
+            { name: "CosyVoice", desc: "阿里通义语音合成模型", badge: "Python", stars: "12k+" },
+            { name: "MeloTTS", desc: "MyShell 高速多语言 TTS", badge: "Python", stars: "8k+" },
+            { name: "XTTS", desc: "Coqui 多语言语音合成", badge: "Python", stars: "8k+" },
+            { name: "Suno", desc: "AI 音乐生成平台", badge: "商业", stars: "-" },
+            { name: "Udio", desc: "AI 音乐生成平台", badge: "商业", stars: "-" }
+        ];
+
+        const frontendData = [
+            { name: "Open WebUI", desc: "最流行的自托管 LLM WebUI", badge: "TS", stars: "95k+" },
+            { name: "ChatGPT-Next-Web", desc: "一键部署 ChatGPT 界面", badge: "TS", stars: "82k+" },
+            { name: "LobeChat", desc: "开源 ChatGPT 运营级界面", badge: "TS", stars: "78.3k" },
+            { name: "gpt4all", desc: "GPT4All 官方界面", badge: "C++", stars: "77.4k" },
+            { name: "anything-llm", desc: "全栈 LLM 应用，RAG 内置", badge: "TS", stars: "42k+" },
+            { name: "Quivr", desc: "RAG 驱动的 GenAI 集成", badge: "Python", stars: "39.2k" },
+            { name: "chatbox", desc: "桌面版 LLM 客户端", badge: "TS", stars: "25k+" },
+            { name: "Jan", desc: "本地 AI 桌面应用", badge: "TS", stars: "25k+" },
+            { name: "FastGPT", desc: "知识库问答平台", badge: "TS", stars: "22k+" },
+            { name: "LibreChat", desc: "增强版 ChatGPT 克隆", badge: "TS", stars: "25k+" },
+            { name: "ChuanhuChatGPT", desc: "GUI for ChatGPT，支持多模型", badge: "Python", stars: "15.3k" },
+            { name: "MaxKB", desc: "基于 LLM 的知识库问答系统", badge: "Python", stars: "15k+" },
+            { name: "Ollama WebUI", desc: "Ollama 专属 Web 界面", badge: "TS", stars: "15k+" },
+            { name: "Mify", desc: "多模型统一聊天界面", badge: "TS", stars: "10k+" },
+            { name: "Stirling-PDF", desc: "本地托管 PDF 工具（含 AI）", badge: "Java", stars: "55k+" }
+        ];
+
+        const evalData = [
+            { name: "generative-ai-for-beginners", desc: "微软生成式 AI 入门教程", badge: "Jupyter", stars: "111.7k" },
+            { name: "funNLP", desc: "中英文 NLP 工具集合", badge: "Python", stars: "81.1k" },
+            { name: "llm-course", desc: "LLM 学习路线图", badge: "-", stars: "79.9k" },
+            { name: "Open Interpreter", desc: "本地代码解释器", badge: "Python", stars: "58.2k" },
+            { name: "evals", desc: "OpenAI LLM 评测框架", badge: "Python", stars: "18.6k" },
+            { name: "lm-evaluation-harness", desc: "EleutherAI 评测工具", badge: "Python", stars: "8.5k" },
+            { name: "OpenCompass", desc: "上海 AI Lab 大模型评测平台", badge: "Python", stars: "7.1k" },
+            { name: "promptfoo", desc: "LLM 提示词评测工具", badge: "TS", stars: "6k+" },
+            { name: "DeepEval", desc: "LLM 评测单元测试框架", badge: "Python", stars: "5k+" },
+            { name: "Phoenix", desc: "LLM 可观测性与评测", badge: "Python", stars: "5k+" },
+            { name: "LMSYS Arena", desc: "人类盲测 LLM 排名平台", badge: "Python", stars: "5k+" },
+            { name: "RAGAS", desc: "RAG 评测框架", badge: "Python", stars: "4k+" },
+            { name: "VLMEvalKit", desc: "多模态模型评测工具", badge: "Python", stars: "4.2k" },
+            { name: "AgentBench", desc: "Agent 能力评测基准", badge: "Python", stars: "3.5k" },
+            { name: "EvalScope", desc: "阿里 ModelScope 评测框架", badge: "Python", stars: "2.9k" }
+        ];
+
         const agentsData = [
             { name: "AutoGPT", desc: "全自动AI代理，自主完成复杂任务", badge: "自主", metric: "160k", metricLabel: "GitHub Stars" },
             { name: "CrewAI", desc: "多代理协作框架，模拟团队工作", badge: "协作", metric: "9.5", metricLabel: "Trending" },
@@ -873,6 +1056,7 @@
             el.classList.add('active');
             // 切换页面时重置二级导航到默认
             if (pageId === 'models') switchSubTab('default');
+            if (pageId === 'projects') switchProjTab('default');
         }
 
         function switchSubTab(tabId, el) {
@@ -883,12 +1067,29 @@
             else document.querySelector('#models .sub-nav-link').classList.add('active');
         }
 
+        function switchProjTab(tabId, el) {
+            document.querySelectorAll('#projects .sub-nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('#projects .sub-page').forEach(p => p.classList.remove('active'));
+            document.getElementById('proj-' + tabId).classList.add('active');
+            if (el) el.classList.add('active');
+            else document.querySelector('#projects .sub-nav-link').classList.add('active');
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderRanking('models-list', modelsData, true);
             renderRanking('cn-models-list', cnModelsData, true);
             renderRanking('image-models-list', imageModelsData, true);
             renderRanking('video-models-list', videoModelsData, true);
             renderRanking('projects-list', projectsData, false);
+            renderRanking('inference-list', inferenceData, false);
+            renderRanking('framework-list', frameworkData, false);
+            renderRanking('coding-list', codingData, true);
+            renderRanking('agent-list', agentGenData, false);
+            renderRanking('training-list', trainingData, false);
+            renderRanking('image-list', imageData, false);
+            renderRanking('audio-list', audioData, false);
+            renderRanking('frontend-list', frontendData, false);
+            renderRanking('eval-list', evalData, false);
             renderRanking('agents-list', agentsData, true);
         });
     </script>
