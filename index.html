@@ -590,6 +590,8 @@
             <div class="sub-nav">
                 <div class="sub-nav-link active" onclick="switchSubTab('default', this)">默认</div>
                 <div class="sub-nav-link" onclick="switchSubTab('cn', this)">国产</div>
+                <div class="sub-nav-link" onclick="switchSubTab('image', this)">生图</div>
+                <div class="sub-nav-link" onclick="switchSubTab('video', this)">生视频</div>
             </div>
             <div class="ranking-scroll">
                 <div id="sub-default" class="sub-page active">
@@ -597,6 +599,12 @@
                 </div>
                 <div id="sub-cn" class="sub-page">
                     <div class="ranking-list" id="cn-models-list"></div>
+                </div>
+                <div id="sub-image" class="sub-page">
+                    <div class="ranking-list" id="image-models-list"></div>
+                </div>
+                <div id="sub-video" class="sub-page">
+                    <div class="ranking-list" id="video-models-list"></div>
                 </div>
             </div>
         </div>
@@ -695,6 +703,72 @@
             { name: "GLM-4.5-Air", desc: "智谱轻量版", badge: "智谱AI", metric: "1386", metricLabel: "Arena Elo", logo: "https://models.dev/logos/zhipuai.svg" },
             { name: "Step-3", desc: "阶跃星辰旗舰模型", badge: "阶跃星辰", metric: "1360", metricLabel: "Arena Elo", logo: "https://models.dev/logos/stepfun.svg" },
             { name: "Minimax-M1", desc: "MiniMax，Apache 2.0", badge: "MiniMax", metric: "1351", metricLabel: "Arena Elo", logo: "https://models.dev/logos/minimax.svg" }
+        ];
+
+        const imageModelsData = [
+            { name: "gpt-image-2", desc: "OpenAI 新一代多模态图像生成，综合最强", badge: "OpenAI", metric: "1385", metricLabel: "Elo", logo: "https://models.dev/logos/openai.svg" },
+            { name: "reve-2.0", desc: "Reve 第二代模型，高质量生成", badge: "Reve", metric: "1273", metricLabel: "Elo" },
+            { name: "gemini-3.1-flash-image", desc: "Google Flash 系列，速度快，支持联网生成", badge: "Google", metric: "1269", metricLabel: "Elo", logo: "https://models.dev/logos/google.svg" },
+            { name: "mai-image-2.5", desc: "微软图像模型 2.5 版", badge: "Microsoft", metric: "1253", metricLabel: "Elo", logo: "https://models.dev/logos/microsoft.svg" },
+            { name: "gemini-3-pro-image-2k", desc: "Google Pro 版，支持 2K 分辨率", badge: "Google", metric: "1245", metricLabel: "Elo", logo: "https://models.dev/logos/google.svg" },
+            { name: "gpt-image-1.5-hifi", desc: "OpenAI 高保真度版", badge: "OpenAI", metric: "1241", metricLabel: "Elo", logo: "https://models.dev/logos/openai.svg" },
+            { name: "grok-imagine-quality", desc: "xAI 图像生成，质量优先", badge: "xAI", metric: "1234", metricLabel: "Elo", logo: "https://models.dev/logos/xai.svg" },
+            { name: "gemini-3-pro-image", desc: "Google Pro 版基础配置", badge: "Google", metric: "1232", metricLabel: "Elo", logo: "https://models.dev/logos/google.svg" },
+            { name: "ideogram-4.0-quality", desc: "文字渲染能力强，设计感出众", badge: "Ideogram", metric: "1204", metricLabel: "Elo" },
+            { name: "uni-1.1-max", desc: "Luma AI 最强版", badge: "Luma AI", metric: "1191", metricLabel: "Elo" },
+            { name: "mai-image-2", desc: "微软第二代基础版", badge: "Microsoft", metric: "1183", metricLabel: "Elo", logo: "https://models.dev/logos/microsoft.svg" },
+            { name: "uni-1.1", desc: "Luma AI 通用版", badge: "Luma AI", metric: "1175", metricLabel: "Elo" },
+            { name: "grok-imagine-image", desc: "xAI 基础图像生成", badge: "xAI", metric: "1174", metricLabel: "Elo", logo: "https://models.dev/logos/xai.svg" },
+            { name: "recraft-v4.1-pro", desc: "专业设计工具，品牌视觉能力强", badge: "Recraft", metric: "1169", metricLabel: "Elo" },
+            { name: "qwen-image-2.0-pro", desc: "通义千问图像 Pro 版", badge: "阿里巴巴", metric: "1169", metricLabel: "Elo", logo: "https://models.dev/logos/alibaba.svg" },
+            { name: "flux-2-max", desc: "Flux 2 最强版，开源文生图标杆", badge: "Black Forest", metric: "1163", metricLabel: "Elo" },
+            { name: "grok-imagine-pro", desc: "xAI Pro 版", badge: "xAI", metric: "1161", metricLabel: "Elo", logo: "https://models.dev/logos/xai.svg" },
+            { name: "flux-2-flex", desc: "Flux 2 灵活可调版", badge: "Black Forest", metric: "1156", metricLabel: "Elo" },
+            { name: "flux-2-pro", desc: "Flux 2 Pro 版", badge: "Black Forest", metric: "1156", metricLabel: "Elo" },
+            { name: "reve-v1.5", desc: "Reve 1.5 代", badge: "Reve", metric: "1153", metricLabel: "Elo" },
+            { name: "gemini-2.5-flash-image", desc: "Google 2.5 Flash，投票数最高（78万+）", badge: "Google", metric: "1152", metricLabel: "Elo", logo: "https://models.dev/logos/google.svg" },
+            { name: "hunyuan-image-3.0", desc: "腾讯混元第三代图像模型", badge: "腾讯", metric: "1151", metricLabel: "Elo", logo: "https://models.dev/logos/tencent.svg" },
+            { name: "flux-2-dev", desc: "Flux 2 开发版（非商业许可）", badge: "Black Forest", metric: "1150", metricLabel: "Elo" },
+            { name: "imagen-ultra-4.0", desc: "Google Imagen 4 Ultra", badge: "Google", metric: "1148", metricLabel: "Elo", logo: "https://models.dev/logos/google.svg" },
+            { name: "seedream-4.5", desc: "字节跳动 Seedream 4.5", badge: "字节跳动", metric: "1145", metricLabel: "Elo", logo: "https://models.dev/logos/bytedance.svg" },
+            { name: "seedream-4-2k", desc: "Seedream 4，2K 分辨率", badge: "字节跳动", metric: "1140", metricLabel: "Elo", logo: "https://models.dev/logos/bytedance.svg" },
+            { name: "wan2.6-t2i", desc: "阿里 Wan 系列文生图", badge: "阿里巴巴", metric: "1133", metricLabel: "Elo", logo: "https://models.dev/logos/alibaba.svg" },
+            { name: "seedream-5.0-lite", desc: "Seedream 5 轻量版", badge: "字节跳动", metric: "1131", metricLabel: "Elo", logo: "https://models.dev/logos/bytedance.svg" },
+            { name: "imagen-4.0", desc: "Google Imagen 4 标准版，投票数 51万+", badge: "Google", metric: "1129", metricLabel: "Elo", logo: "https://models.dev/logos/google.svg" },
+            { name: "stable-diffusion-3.5", desc: "Stability AI 开源文生图经典", badge: "Stability AI", metric: "1079", metricLabel: "Elo" }
+        ];
+
+        const videoModelsData = [
+            { name: "Seedance 2.0", desc: "字节跳动榜首，Elo 1274，35 秒生成", badge: "ByteDance", metric: "100.0", metricLabel: "共识评分", logo: "https://models.dev/logos/bytedance.svg" },
+            { name: "SkyReels V4", desc: "昆仑万维，$7.20/分钟", badge: "Skywork AI", metric: "97.0", metricLabel: "共识评分" },
+            { name: "PixVerse V6", desc: "PixVerse 第六代，$5.40/分钟", badge: "PixVerse", metric: "90.9", metricLabel: "共识评分" },
+            { name: "grok-imagine-video", desc: "xAI 视频生成，Design Arena 第一", badge: "xAI", metric: "90.3", metricLabel: "共识评分", logo: "https://models.dev/logos/xai.svg" },
+            { name: "Kling 3.0 Omni 1080p", desc: "快手可灵，1080p Pro 版", badge: "快手", metric: "87.9", metricLabel: "共识评分" },
+            { name: "Kling 3.0 1080p", desc: "快手可灵，1080p Pro 版", badge: "快手", metric: "87.7", metricLabel: "共识评分" },
+            { name: "Wan 2.7", desc: "阿里 Wan 系列，Design Arena 第 5", badge: "Alibaba", metric: "85.2", metricLabel: "共识评分", logo: "https://models.dev/logos/alibaba.svg" },
+            { name: "Veo 3.1", desc: "Google 视频模型，Arena AI 第 1（Elo 1381）", badge: "Google", metric: "84.2", metricLabel: "共识评分", logo: "https://models.dev/logos/google.svg" },
+            { name: "Veo 3.1 Fast", desc: "Google Veo 3.1 快速版", badge: "Google", metric: "83.5", metricLabel: "共识评分", logo: "https://models.dev/logos/google.svg" },
+            { name: "Vidu Q3 Pro", desc: "生数科技，$9.60/分钟", badge: "Vidu", metric: "75.8", metricLabel: "共识评分" },
+            { name: "Veo 3", desc: "Google 第三代视频模型", badge: "Google", metric: "73.3", metricLabel: "共识评分", logo: "https://models.dev/logos/google.svg" },
+            { name: "PixVerse V5.6", desc: "PixVerse 上一代", badge: "PixVerse", metric: "71.5", metricLabel: "共识评分" },
+            { name: "Kling 3.0 Omni 720p", desc: "快手可灵标准版", badge: "快手", metric: "69.7", metricLabel: "共识评分" },
+            { name: "Sora 2 Pro", desc: "OpenAI 视频模型，$30/分钟（最贵）", badge: "OpenAI", metric: "69.2", metricLabel: "共识评分", logo: "https://models.dev/logos/openai.svg" },
+            { name: "Kling 3.0 720p", desc: "快手可灵标准版 720p", badge: "快手", metric: "66.7", metricLabel: "共识评分" },
+            { name: "Runway Gen-4.5", desc: "Runway 第四代半", badge: "Runway", metric: "65.8", metricLabel: "共识评分" },
+            { name: "Wan 2.6", desc: "阿里 Wan 系列", badge: "Alibaba", metric: "58.5", metricLabel: "共识评分", logo: "https://models.dev/logos/alibaba.svg" },
+            { name: "Sora 2", desc: "OpenAI Sora 2（12月版）", badge: "OpenAI", metric: "57.7", metricLabel: "共识评分", logo: "https://models.dev/logos/openai.svg" },
+            { name: "Kling 2.5 Turbo", desc: "快手可灵快速版", badge: "快手", metric: "55.9", metricLabel: "共识评分" },
+            { name: "Kling O1 Pro", desc: "快手可灵 O1 Pro", badge: "快手", metric: "54.8", metricLabel: "共识评分" },
+            { name: "Ray 3", desc: "Luma Labs 第三代", badge: "Luma Labs", metric: "52.4", metricLabel: "共识评分" },
+            { name: "Seedance 1.5 pro", desc: "字节跳动 Seedance 1.5", badge: "ByteDance", metric: "50.5", metricLabel: "共识评分", logo: "https://models.dev/logos/bytedance.svg" },
+            { name: "Hailuo-2.3", desc: "MiniMax 海螺视频，103 秒生成", badge: "MiniMax", metric: "44.4", metricLabel: "共识评分", logo: "https://models.dev/logos/minimax.svg" },
+            { name: "Wan 2.5 Preview", desc: "阿里 Wan 预览版", badge: "Alibaba", metric: "42.2", metricLabel: "共识评分", logo: "https://models.dev/logos/alibaba.svg" },
+            { name: "Hailuo 2.3", desc: "MiniMax 海螺，$2.80/分钟低价", badge: "MiniMax", metric: "40.0", metricLabel: "共识评分", logo: "https://models.dev/logos/minimax.svg" },
+            { name: "P-Video 1080p", desc: "Pruna AI，30.7 秒快速生成", badge: "Pruna AI", metric: "37.0", metricLabel: "共识评分" },
+            { name: "Hailuo 02", desc: "MiniMax 海螺标准版", badge: "MiniMax", metric: "31.7", metricLabel: "共识评分", logo: "https://models.dev/logos/minimax.svg" },
+            { name: "Seedance 1.0", desc: "字节跳动第一代", badge: "ByteDance", metric: "24.1", metricLabel: "共识评分", logo: "https://models.dev/logos/bytedance.svg" },
+            { name: "Hunyuan Video", desc: "腾讯混元视频模型", badge: "Tencent", metric: "13.9", metricLabel: "共识评分", logo: "https://models.dev/logos/tencent.svg" },
+            { name: "Ray 2", desc: "Luma Labs 第二代", badge: "Luma Labs", metric: "6.5", metricLabel: "共识评分" }
         ];
 
         const projectsData = [
@@ -812,6 +886,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderRanking('models-list', modelsData, true);
             renderRanking('cn-models-list', cnModelsData, true);
+            renderRanking('image-models-list', imageModelsData, true);
+            renderRanking('video-models-list', videoModelsData, true);
             renderRanking('projects-list', projectsData, false);
             renderRanking('agents-list', agentsData, true);
         });
