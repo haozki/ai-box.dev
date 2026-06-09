@@ -64,3 +64,62 @@
 | Mistral AI | Mistral 系列 | ✅ |
 | Microsoft | MAI / Phi 系列 | 部分 |
 | MiniMax | MiniMax-M 系列 | 否 |
+
+---
+
+## 国产大模型 TOP 30
+
+> 数据来源：[Chatbot Arena Leaderboard (openlm.ai)](https://openlm.ai/chatbot-arena/)
+> 筛选标准：开发商为中国公司，按 Arena Elo 降序排列
+> 更新时间：2026-06-09（原始数据 2026-06-01）
+> ✅ = 开源/可商用许可证
+
+| 排名 | 模型名 | 开发商 | Arena Elo | 类型 | 特点 |
+|------|--------|--------|-----------|------|------|
+| 1 | Qwen3.7-Max | 阿里巴巴 | 1486 | ✅ 开源 | 通义千问旗舰，中文能力最强 |
+| 2 | ERNIE-5.1 | 百度 | 1475 | 闭源 | 文心一言最新版，中文理解与知识问答 |
+| 3 | DeepSeek-V4-Pro | DeepSeek | 1467 | ✅ 开源 | 国产开源之光，推理能力出色 |
+| 4 | GLM-5.1 | 智谱AI | 1467 | ✅ 开源 | ChatGLM 旗舰，长文本理解强，MIT 许可 |
+| 5 | Kimi-K2.6-Thinking | 月之暗面 | 1466 | ✅ 开源 | Kimi 推理模型，超长上下文 |
+| 6 | Qwen3.5-Max | 阿里巴巴 | 1466 | ✅ 开源 | 通义千问次旗舰，工具调用能力强 |
+| 7 | MiMo-V2.5-Pro | 小米 | 1466 | ✅ 开源 | 小米旗舰，推理与数学表现优异 |
+| 8 | Seed2.0 Pro | 字节跳动 | 1466 | 闭源 | 豆包旗舰，多语言能力强 |
+| 9 | ERNIE-5.0 | 百度 | 1458 | 闭源 | 文心前代旗舰 |
+| 10 | GLM-5 | 智谱AI | 1452 | ✅ 开源 | MIT 许可 |
+| 11 | Kimi-K2.5-Thinking | 月之暗面 | 1451 | ✅ 开源 | 推理增强版 |
+| 12 | DeepSeek-V4-Flash | DeepSeek | 1445 | ✅ 开源 | 高速低成本版 |
+| 13 | GLM-4.7 | 智谱AI | 1445 | ✅ 开源 | MIT 许可 |
+| 14 | GLM-4.6 | 智谱AI | 1441 | ✅ 开源 | MIT 许可 |
+| 15 | GLM-4.5 | 智谱AI | 1430 | ✅ 开源 | MIT 许可 |
+| 16 | MiMo-V2-Pro | 小米 | 1431 | ✅ 开源 | 专业版 |
+| 17 | Qwen3-VL-235B-A22B-Instruct | 阿里巴巴 | 1429 | ✅ 开源 | 视觉语言模型 |
+| 18 | DeepSeek-R1-0528 | DeepSeek | 1426 | ✅ 开源 | 推理增强，数学/代码顶尖 |
+| 19 | Hunyuan-Hy3 | 腾讯 | 1422 | 闭源 | 混元最新旗舰，中文创作与企业应用 |
+| 20 | DeepSeek-V3.2-Thinking | DeepSeek | 1422 | ✅ 开源 | V3 思维链版 |
+| 21 | DeepSeek-V3.2 | DeepSeek | 1418 | ✅ 开源 | V3 基础版 |
+| 22 | Minimax-M2.7 | MiniMax | 1416 | 闭源 | MiniMax 旗舰，视频生成见长 |
+| 23 | Hunyuan-Vision-1.5-Thinking | 腾讯 | 1410 | 闭源 | 视觉推理模型 |
+| 24 | MiMo-V2-Flash | 小米 | 1402 | ✅ 开源 | 高速版 |
+| 25 | Minimax-M2.5 | MiniMax | 1408 | ✅ 开源 | MIT 许可 |
+| 26 | Minimax-M2.1 | MiniMax | 1399 | ✅ 开源 | MIT 许可 |
+| 27 | Hunyuan-T1-20250711 | 腾讯 | 1400 | 闭源 | 特定版本 |
+| 28 | Step-3.5-Flash | 阶跃星辰 | 1387 | ✅ 开源 | 快速版，Apache 2.0 |
+| 29 | Kimi-K2-Thinking | 月之暗面 | 1438 | ✅ 开源 | K2 推理版 |
+| 30 | GLM-4.5-Air | 智谱AI | 1386 | ✅ 开源 | 轻量版 |
+
+---
+
+### 国产开发商分布
+
+| 开发商 | 代表模型 | 最高 Elo | 开源 |
+|--------|----------|---------|------|
+| 阿里巴巴 | Qwen 系列 | 1486 | ✅ |
+| 百度 | ERNIE 系列 | 1475 | 否 |
+| DeepSeek | DeepSeek-V/R 系列 | 1467 | ✅ |
+| 智谱AI | GLM 系列 | 1467 | ✅ |
+| 月之暗面 | Kimi-K 系列 | 1466 | ✅ |
+| 小米 | MiMo 系列 | 1466 | ✅ |
+| 字节跳动 | Seed 系列 | 1466 | 否 |
+| 腾讯 | Hunyuan 系列 | 1422 | 部分 |
+| MiniMax | MiniMax-M 系列 | 1416 | 部分 |
+| 阶跃星辰 | Step 系列 | 1387 | ✅ |
