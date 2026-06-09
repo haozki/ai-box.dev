@@ -123,3 +123,86 @@
 | 腾讯 | Hunyuan 系列 | 1422 | 部分 |
 | MiniMax | MiniMax-M 系列 | 1416 | 部分 |
 | 阶跃星辰 | Step 系列 | 1387 | ✅ |
+
+---
+
+## 文生图模型 TOP 30
+
+> 数据来源：[Text-to-Image Arena (arena.ai)](https://arena.ai/leaderboard/text-to-image)
+> 评分方式：539 万+次盲测投票，Elo 评分系统
+> 更新时间：2026-06-09（原始数据 2026-06-05）
+> ✅ = 开源/可商用许可证
+
+| 排名 | 模型名 | 开发商 | Elo | 特点 |
+|------|--------|--------|-----|------|
+| 1 | gpt-image-2 (medium) | OpenAI | 1385 | 新一代多模态图像生成，综合最强 |
+| 2 | reve-2.0 | Reve | 1273 | 第二代模型，高质量生成 |
+| 3 | gemini-3.1-flash-image-preview | Google | 1269 | Flash 系列，速度快，支持联网生成 |
+| 4 | mai-image-2.5 | Microsoft | 1253 | 微软图像模型 2.5 版 |
+| 5 | gemini-3-pro-image-preview-2k | Google | 1245 | Pro 版，支持 2K 分辨率 |
+| 6 | gpt-image-1.5-high-fidelity | OpenAI | 1241 | 高保真度版 |
+| 7 | grok-imagine-image-quality | xAI | 1234 | xAI 图像生成，质量优先 |
+| 8 | gemini-3-pro-image-preview | Google | 1232 | Pro 版基础配置 |
+| 9 | ideogram-4.0-quality | Ideogram | 1204 | 文字渲染能力强 |
+| 10 | uni-1.1-max | Luma AI | 1191 | Luma AI 最强版 |
+| 11 | mai-image-2 | Microsoft | 1183 | 微软第二代基础版 |
+| 12 | uni-1.1 | Luma AI | 1175 | Luma AI 通用版 |
+| 13 | grok-imagine-image | xAI | 1174 | xAI 基础图像生成 |
+| 14 | recraft-v4.1-utility-pro | Recraft | 1169 | 专业设计工具 |
+| 15 | qwen-image-2.0-pro | Alibaba | 1169 | 通义千问图像 Pro 版 |
+| 16 | flux-2-max | Black Forest Labs | 1163 | Flux 2 最强版 |
+| 17 | grok-imagine-image-pro | xAI | 1161 | xAI Pro 版 |
+| 18 | flux-2-flex | Black Forest Labs | 1156 | Flux 2 灵活可调版 |
+| 19 | flux-2-pro | Black Forest Labs | 1156 | Flux 2 Pro 版 |
+| 20 | reve-v1.5 | Reve | 1153 | Reve 1.5 代 |
+| 21 | gemini-2.5-flash-image-preview | Google | 1152 | 2.5 Flash 预览版，投票数最高（78 万+） |
+| 22 | hunyuan-image-3.0 | Tencent | 1151 | 腾讯混元第三代图像模型 |
+| 23 | flux-2-dev | Black Forest Labs | 1150 | Flux 2 开发版（非商业许可） |
+| 24 | imagen-ultra-4.0 | Google | 1148 | Imagen 4 Ultra，高质量生成 |
+| 25 | seedream-4.5 | ByteDance | 1145 | 字节跳动 Seedream 4.5 |
+| 26 | seedream-4-2k | ByteDance | 1140 | Seedream 4，2K 分辨率 |
+| 27 | wan2.6-t2i | Alibaba | 1133 | 阿里 Wan 系列文生图 |
+| 28 | seedream-5.0-lite | ByteDance | 1131 | Seedream 5 轻量版 |
+| 29 | recraft-v4.1-pro | Recraft | 1130 | Recraft 4.1 Pro |
+| 30 | imagen-4.0 | Google | 1129 | Imagen 4 标准版，投票数 51 万+ |
+
+---
+
+## 文生视频模型 TOP 30
+
+> 数据来源：[Magic Hour Text-to-Video Leaderboard](https://magichour.ai/model-leaderboard/text-to-video)
+> 综合 Artificial Analysis、Design Arena、Arena AI 三个平台评分
+> 更新时间：2026-06-09（原始数据 2026-04-06）
+
+| 排名 | 模型名 | 开发商 | 共识评分 | 特点 |
+|------|--------|--------|---------|------|
+| 1 | Dreamina Seedance 2.0 | ByteDance | 100.0 | 榜首，Elo 1274，35 秒生成 |
+| 2 | SkyReels V4 | Skywork AI | 97.0 | $7.20/分钟 |
+| 3 | PixVerse V6 | PixVerse | 90.9 | $5.40/分钟 |
+| 4 | grok-imagine-video | xAI | 90.3 | Design Arena 第一（Elo 1328），23 秒生成 |
+| 5 | Kling 3.0 Omni 1080p | KlingAI (快手) | 87.9 | 1080p Pro 版，$13.44/分钟 |
+| 6 | Kling 3.0 1080p | KlingAI (快手) | 87.7 | 1080p Pro 版 |
+| 7 | Wan 2.7 | Alibaba | 85.2 | Design Arena 第 5 名 |
+| 8 | Veo 3.1 | Google | 84.2 | Arena AI 第 1 名（Elo 1381），$12/分钟 |
+| 9 | Veo 3.1 Fast | Google | 83.5 | Veo 3.1 快速版，$6/分钟 |
+| 10 | Vidu Q3 Pro | Vidu (生数科技) | 75.8 | $9.60/分钟 |
+| 11 | Veo 3 | Google | 73.3 | $12/分钟 |
+| 12 | PixVerse V5.6 | PixVerse | 71.5 | $9/分钟 |
+| 13 | Kling 3.0 Omni 720p | KlingAI (快手) | 69.7 | 标准版 720p |
+| 14 | Sora 2 Pro | OpenAI | 69.2 | Arena AI 第 4，$30/分钟（最贵） |
+| 15 | Veo 3 Fast Preview | Google | 68.0 | Design Arena 第 2 |
+| 16 | Kling 3.0 720p | KlingAI (快手) | 66.7 | 标准版 720p |
+| 17 | Runway Gen-4.5 | Runway | 65.8 | Artificial Analysis 第 8 |
+| 18 | Wan 2.6 | Alibaba | 58.5 | Arena AI 第 8，$9/分钟 |
+| 19 | Sora 2 (December) | OpenAI | 57.7 | $6/分钟 |
+| 20 | Kling 2.5 Turbo 1080p | KlingAI (快手) | 55.9 | 快速版，$4.20/分钟 |
+| 21 | Kling O1 Pro | KlingAI (快手) | 54.8 | $10.08/分钟 |
+| 22 | Kling 2.6 Pro | KlingAI (快手) | 54.4 | $4.20/分钟 |
+| 23 | Ray 3 | Luma Labs | 52.4 | $13.20/分钟 |
+| 24 | Seedance 1.5 pro | ByteDance | 50.5 | $5.93/分钟 |
+| 25 | MiniMax Hailuo-2.3 | MiniMax | 44.4 | 103 秒生成 |
+| 26 | Wan 2.5 Preview | Alibaba | 42.2 | Arena AI 第 11 |
+| 27 | Glam.ai 1.0 | Glam.ai | 40.7 | 156 秒生成 |
+| 28 | Hailuo 2.3 | MiniMax | 40.0 | $2.80/分钟，低价 |
+| 29 | P-Video 1080p | Pruna AI | 37.0 | 30.7 秒快速生成 |
+| 30 | Hailuo 02 Standard | MiniMax | 31.7 | $2.80/分钟 |
