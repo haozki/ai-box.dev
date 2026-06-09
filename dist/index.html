@@ -847,21 +847,21 @@
         ];
 
         const codingData = [
-            { name: "Claude Code", desc: "Anthropic 终端编程 Agent，深度推理", badge: "Anthropic", metric: "50k+", metricLabel: "Stars" },
-            { name: "Cursor", desc: "AI 优先 IDE，Agent 模式强大", badge: "商业", metric: "-", metricLabel: "" },
-            { name: "GitHub Copilot", desc: "微软/GitHub，VS Code 深度集成", badge: "Microsoft", metric: "-", metricLabel: "" },
-            { name: "OpenAI Codex", desc: "OpenAI CLI 编程 Agent", badge: "OpenAI", metric: "30k+", metricLabel: "Stars" },
-            { name: "Windsurf", desc: "Codeium 出品，AI 集成开发环境", badge: "商业", metric: "-", metricLabel: "" },
-            { name: "Devin", desc: "Cognition AI 软件工程师 Agent", badge: "商业", metric: "-", metricLabel: "" },
-            { name: "aider", desc: "终端 AI 结对编程，支持多模型", badge: "开源", metric: "45.9k", metricLabel: "Stars" },
-            { name: "OpenCode", desc: "开源终端编程 Agent", badge: "开源", metric: "15k+", metricLabel: "Stars" },
-            { name: "Trae", desc: "字节跳动 AI IDE", badge: "ByteDance", metric: "-", metricLabel: "" },
-            { name: "CodeBuddy", desc: "腾讯 AI 编程助手", badge: "Tencent", metric: "-", metricLabel: "" },
-            { name: "Continue", desc: "VS Code/JetBrains AI 扩展", badge: "开源", metric: "22.5k", metricLabel: "Stars" },
-            { name: "Cline", desc: "VS Code 自主编码 Agent", badge: "开源", metric: "35k+", metricLabel: "Stars" },
-            { name: "Roo Code", desc: "VS Code 多模式编程 Agent", badge: "开源", metric: "15k+", metricLabel: "Stars" },
-            { name: "Amazon Q", desc: "亚马逊 AI 编程助手", badge: "Amazon", metric: "-", metricLabel: "" },
-            { name: "Augment Code", desc: "企业级 AI 编程平台", badge: "商业", metric: "-", metricLabel: "" }
+            { name: "Claude Code", desc: "Anthropic 终端编程 Agent，深度推理", badge: "Anthropic", stars: "50k+" },
+            { name: "aider", desc: "终端 AI 结对编程，支持多模型", badge: "开源", stars: "45.9k" },
+            { name: "Cline", desc: "VS Code 自主编码 Agent", badge: "开源", stars: "35k+" },
+            { name: "OpenAI Codex", desc: "OpenAI CLI 编程 Agent", badge: "OpenAI", stars: "30k+" },
+            { name: "Continue", desc: "VS Code/JetBrains AI 扩展", badge: "开源", stars: "22.5k" },
+            { name: "OpenCode", desc: "开源终端编程 Agent", badge: "开源", stars: "15k+" },
+            { name: "Roo Code", desc: "VS Code 多模式编程 Agent", badge: "开源", stars: "15k+" },
+            { name: "Cursor", desc: "AI 优先 IDE，Agent 模式强大", badge: "商业" },
+            { name: "GitHub Copilot", desc: "微软/GitHub，VS Code 深度集成", badge: "商业" },
+            { name: "Windsurf", desc: "Codeium 出品，AI 集成开发环境", badge: "商业" },
+            { name: "Devin", desc: "Cognition AI 软件工程师 Agent", badge: "商业" },
+            { name: "Trae", desc: "字节跳动 AI IDE", badge: "商业" },
+            { name: "CodeBuddy", desc: "腾讯 AI 编程助手", badge: "商业" },
+            { name: "Amazon Q", desc: "亚马逊 AI 编程助手", badge: "商业" },
+            { name: "Augment Code", desc: "企业级 AI 编程平台", badge: "商业" }
         ];
 
         const agentGenData = [
@@ -990,10 +990,15 @@
                             </div>
                             <div class="ranking-desc">${item.desc}</div>
                         </div>
+                        ${(() => {
+                            const val = showMetrics ? item.metric : item.stars;
+                            const lbl = showMetrics ? item.metricLabel : 'GitHub Stars';
+                            return val ? `
                         <div class="ranking-metrics">
-                            <div class="metric-value">${showMetrics ? item.metric : '⭐ ' + item.stars}</div>
-                            <div class="metric-label">${showMetrics ? item.metricLabel : 'GitHub Stars'}</div>
-                        </div>
+                            <div class="metric-value">${showMetrics ? val : '⭐ ' + val}</div>
+                            <div class="metric-label">${lbl}</div>
+                        </div>` : '';
+                        })()}
                     </div>
                 `;
             });
@@ -1035,7 +1040,7 @@
             renderRanking('projects-list', projectsData, false);
             renderRanking('inference-list', inferenceData, false);
             renderRanking('framework-list', frameworkData, false);
-            renderRanking('coding-list', codingData, true);
+            renderRanking('coding-list', codingData, false);
             renderRanking('agent-list', agentGenData, false);
             renderRanking('training-list', trainingData, false);
             renderRanking('image-list', imageData, false);
