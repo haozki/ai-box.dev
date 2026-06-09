@@ -19,32 +19,32 @@
         .header-text p{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-top:4px}
         .timeline{position:relative;padding-left:32px}
         .timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--cyan),var(--magenta));opacity:0.3}
-        .commit{position:relative;margin-bottom:32px;opacity:0;transform:translateX(-20px);animation:slideIn 0.5s ease forwards}
-        .commit:nth-child(1){animation-delay:0.05s}.commit:nth-child(2){animation-delay:0.1s}.commit:nth-child(3){animation-delay:0.15s}.commit:nth-child(4){animation-delay:0.2s}.commit:nth-child(5){animation-delay:0.25s}.commit:nth-child(6){animation-delay:0.3s}.commit:nth-child(7){animation-delay:0.35s}.commit:nth-child(8){animation-delay:0.4s}.commit:nth-child(9){animation-delay:0.45s}.commit:nth-child(10){animation-delay:0.5s}
+        .commit{position:relative;margin-bottom:28px;opacity:0;transform:translateX(-20px);animation:slideIn 0.5s ease forwards}
+        .commit:nth-child(1){animation-delay:0.03s}.commit:nth-child(2){animation-delay:0.06s}.commit:nth-child(3){animation-delay:0.09s}.commit:nth-child(4){animation-delay:0.12s}.commit:nth-child(5){animation-delay:0.15s}.commit:nth-child(6){animation-delay:0.18s}.commit:nth-child(7){animation-delay:0.21s}.commit:nth-child(8){animation-delay:0.24s}.commit:nth-child(9){animation-delay:0.27s}.commit:nth-child(10){animation-delay:0.3s}.commit:nth-child(11){animation-delay:0.33s}.commit:nth-child(12){animation-delay:0.36s}.commit:nth-child(13){animation-delay:0.39s}.commit:nth-child(14){animation-delay:0.42s}.commit:nth-child(15){animation-delay:0.45s}
         @keyframes slideIn{to{opacity:1;transform:translateX(0)}}
-        .commit::before{content:'';position:absolute;left:-27px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--cyan);border:3px solid var(--bg);box-shadow:0 0 12px rgba(0,255,200,0.4)}
-        .commit-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all 0.3s ease}
-        .commit-card:hover{background:var(--surface-raised);border-color:rgba(0,255,200,0.15);transform:translateX(6px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-        .commit-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
-        .commit-hash{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--cyan);background:rgba(0,255,200,0.08);padding:3px 10px;border-radius:6px;border:1px solid rgba(0,255,200,0.15)}
-        .commit-date{font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
-        .commit-msg{font-size:17px;font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.5}
-        .commit-files{display:flex;flex-direction:column;gap:6px}
-        .file-row{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;font-size:13px}
-        .file-name{font-family:var(--font-mono);color:var(--text);display:flex;align-items:center;gap:8px}
-        .file-icon{width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+        .commit::before{content:'';position:absolute;left:-27px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--cyan);border:3px solid var(--bg);box-shadow:0 0 12px rgba(0,255,200,0.4)}
+        .commit-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:all 0.3s ease}
+        .commit-card:hover{background:var(--surface-raised);border-color:rgba(0,255,200,0.15);transform:translateX(4px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+        .commit-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+        .commit-hash{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--cyan);background:rgba(0,255,200,0.08);padding:2px 8px;border-radius:5px;border:1px solid rgba(0,255,200,0.15)}
+        .commit-date{font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+        .commit-msg{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.5}
+        .commit-files{display:flex;flex-direction:column;gap:4px}
+        .file-row{display:flex;align-items:center;justify-content:space-between;padding:5px 10px;background:rgba(255,255,255,0.02);border-radius:6px;font-size:12px}
+        .file-name{font-family:var(--font-mono);color:var(--text);display:flex;align-items:center;gap:6px}
+        .file-icon{width:14px;height:14px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
         .file-icon.html{background:rgba(255,152,0,0.2);color:#ff9800}
         .file-icon.md{background:rgba(0,255,200,0.15);color:var(--cyan)}
         .file-icon.json{background:rgba(156,39,176,0.2);color:#ce93d8}
         .file-icon.py{background:rgba(33,150,243,0.2);color:#64b5f6}
         .file-icon.js{background:rgba(255,235,59,0.2);color:#ffd54f}
-        .file-stats{display:flex;gap:12px;font-family:var(--font-mono);font-size:12px}
+        .file-stats{display:flex;gap:10px;font-family:var(--font-mono);font-size:11px}
         .file-add{color:var(--green)}.file-del{color:var(--red)}
-        .commit-summary{margin-top:12px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);padding-top:12px;border-top:1px solid var(--border);display:flex;gap:16px}
-        .summary-item{display:flex;align-items:center;gap:4px}
+        .commit-summary{margin-top:8px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);padding-top:8px;border-top:1px solid var(--border);display:flex;gap:12px}
+        .summary-item{display:flex;align-items:center;gap:3px}
         .dot-green{color:var(--green)}.dot-red{color:var(--red)}.dot-amber{color:var(--amber)}
         .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
-        @media(max-width:640px){body{padding:20px}.timeline{padding-left:24px}.commit::before{left:-19px;width:8px;height:8px}.commit-card{padding:16px}}
+        @media(max-width:640px){body{padding:20px}.timeline{padding-left:24px}.commit::before{left:-19px;width:8px;height:8px}.commit-card{padding:14px}}
     </style>
 </head>
 <body>
@@ -53,169 +53,27 @@
             <div class="header-icon">⎇</div>
             <div class="header-text">
                 <h1>Git History</h1>
-                <p>AIBOX · master · 10 commits</p>
+                <p>AIBOX · master · 15 commits</p>
             </div>
         </div>
         <div class="timeline">
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="44083d1fdf4cc118850d8b8affa786cf98ed751a">44083d1</span>
-                        <span class="commit-date">2026-06-08 23:47</span>
-                    </div>
-                    <div class="commit-msg">添加会话结束规则：更新 Git History + 部署到 gh-pages</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span><span class="file-stats"><span class="file-add">+2</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +2</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="f3e3d90a725a171caac08517b491f2d83f3ec09b">f3e3d90</span>
-                        <span class="commit-date">2026-06-08 23:33</span>
-                    </div>
-                    <div class="commit-msg">添加历史版本：dist/v1（初始版）和 dist/v2（第二版）</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span><span class="file-stats"><span class="file-add">+1</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/v1/github-ai-top25.html</span><span class="file-stats"><span class="file-add">+290</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/v1/index.html</span><span class="file-stats"><span class="file-add">+59</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/v1/llm-top25.html</span><span class="file-stats"><span class="file-add">+395</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon js">J</span> dist/v1/nav.js</span><span class="file-stats"><span class="file-add">+46</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/v2/index.html</span><span class="file-stats"><span class="file-add">+732</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 6 files</span><span class="summary-item"><span class="dot-green">●</span> +1523</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="e7863cbd20e5aecec52a7d08b7a9979c66e6987d">e7863cb</span>
-                        <span class="commit-date">2026-06-08 23:24</span>
-                    </div>
-                    <div class="commit-msg">重构目录：创建 dist/ 部署目录，移入 index.html 和 git-history.html</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span><span class="file-stats"><span class="file-add">+2</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span><span class="file-stats"><span class="file-add">+6</span><span class="file-del">-3</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> git-history.html → dist/git-history.html</span><span class="file-stats"></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> index.html → dist/index.html</span><span class="file-stats"></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 4 files</span><span class="summary-item"><span class="dot-green">●</span> +8</span><span class="summary-item"><span class="dot-red">●</span> -3</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="e3876c44208b078a8b0caa4f7bcc7979cc6ca7e7">e3876c4</span>
-                        <span class="commit-date">2026-06-08 23:04</span>
-                    </div>
-                    <div class="commit-msg">更新 Git History 页面（7 条提交记录）</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> git-history.html</span><span class="file-stats"><span class="file-add">+112</span><span class="file-del">-52</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +112</span><span class="summary-item"><span class="dot-red">●</span> -52</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="e025e6163ca6e8f1cdbb97ac72effdb8464eaa5d">e025e61</span>
-                        <span class="commit-date">2026-06-08 23:02</span>
-                    </div>
-                    <div class="commit-msg">清理临时文件</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon py">P</span> temp/verify_logos.py</span><span class="file-stats"><span class="file-del">-53</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-red">●</span> -53</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="c51e08c86f3c0ae605496fd463a9404d1e27627b">c51e08c</span>
-                        <span class="commit-date">2026-06-08 23:02</span>
-                    </div>
-                    <div class="commit-msg">统一厂商图标：切换到 models.dev SVG（覆盖全部16家厂商）</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> index.html</span><span class="file-stats"><span class="file-add">+38</span><span class="file-del">-58</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon py">P</span> temp/verify_logos.py</span><span class="file-stats"><span class="file-add">+53</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 2 files</span><span class="summary-item"><span class="dot-green">●</span> +91</span><span class="summary-item"><span class="dot-red">●</span> -58</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="335330215eff966b89ba55603a11f4ea49df35cd">3353302</span>
-                        <span class="commit-date">2026-06-07 23:22</span>
-                    </div>
-                    <div class="commit-msg">厂商 Logo 兜底方案：Simple Icons 失败时显示品牌色首字母</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> index.html</span><span class="file-stats"><span class="file-add">+32</span><span class="file-del">-4</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +32</span><span class="summary-item"><span class="dot-red">●</span> -4</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="6af4d9a98fc466de71558342112b77afa5e33b08">6af4d9a</span>
-                        <span class="commit-date">2026-06-07 23:11</span>
-                    </div>
-                    <div class="commit-msg">新增 Git 变更历史查看页面</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span><span class="file-stats"><span class="file-add">+3</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> git-history.html</span><span class="file-stats"><span class="file-add">+346</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 2 files</span><span class="summary-item"><span class="dot-green">●</span> +349</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="65bcbd94d74030fe1e63c10aec1578af3a3280e6">65bcbd9</span>
-                        <span class="commit-date">2026-06-07 23:05</span>
-                    </div>
-                    <div class="commit-msg">为热门模型添加厂商 Logo（Simple Icons CDN）</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> index.html</span><span class="file-stats"><span class="file-add">+39</span><span class="file-del">-30</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +39</span><span class="summary-item"><span class="dot-red">●</span> -30</span></div>
-                </div>
-            </div>
-
-            <div class="commit">
-                <div class="commit-card">
-                    <div class="commit-top">
-                        <span class="commit-hash" title="af4ea5c90f52c88f791363cac24a1fc81877a709">af4ea5c</span>
-                        <span class="commit-date">2026-06-07 22:55</span>
-                    </div>
-                    <div class="commit-msg">初始版本：AIBOX AI科技导航站</div>
-                    <div class="commit-files">
-                        <div class="file-row"><span class="file-name"><span class="file-icon json">{}</span> .codebuddy/settings.local.json</span><span class="file-stats"><span class="file-add">+7</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span><span class="file-stats"><span class="file-add">+24</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span><span class="file-stats"><span class="file-add">+37</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> assets/coding-agents.md</span><span class="file-stats"><span class="file-add">+36</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> assets/companies.md</span><span class="file-stats"><span class="file-add">+36</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon md">M</span> assets/models.md</span><span class="file-stats"><span class="file-add">+66</span></span></div>
-                        <div class="file-row"><span class="file-name"><span class="file-icon html">H</span> index.html</span><span class="file-stats"><span class="file-add">+732</span></span></div>
-                    </div>
-                    <div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 7 files</span><span class="summary-item"><span class="dot-green">●</span> +938</span></div>
-                </div>
-            </div>
-
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">2c18ae6</span><span class="commit-date">2026-06-09 23:27</span></div><div class="commit-msg">更新 6/9 工作记录</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-09.md</span><span class="file-stats"><span class="file-add">+1</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +1</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">1fb8e94</span><span class="commit-date">2026-06-09 23:24</span></div><div class="commit-msg">统一编程Agent格式：开源项目显示⭐Stars，商业产品隐藏数字区域</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/index.html</span><span class="file-stats"><span class="file-add">+24</span><span class="file-del">-19</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +24</span><span class="summary-item"><span class="dot-red">●</span> -19</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">95c7d9e</span><span class="commit-date">2026-06-09 23:16</span></div><div class="commit-msg">更新 6/9 工作记录</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-09.md</span><span class="file-stats"><span class="file-add">+2</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +2</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">3c497d5</span><span class="commit-date">2026-06-09 23:14</span></div><div class="commit-msg">删除一级导航热门Agent及对应数据</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/index.html</span><span class="file-stats"><span class="file-del">-49</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-red">●</span> -49</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">fb70fc3</span><span class="commit-date">2026-06-09 23:07</span></div><div class="commit-msg">补充 6/8-6/9 工作记录 + 创建项目长期记忆 MEMORY.md</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-08.md</span><span class="file-stats"><span class="file-add">+15</span></span></div><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-09.md</span><span class="file-stats"><span class="file-add">+16</span></span></div><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/MEMORY.md</span><span class="file-stats"><span class="file-add">+33</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 3 files</span><span class="summary-item"><span class="dot-green">●</span> +64</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">4e2e7f6</span><span class="commit-date">2026-06-09 22:57</span></div><div class="commit-msg">热门项目增加二级导航：默认 + 9 大分类</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/index.html</span><span class="file-stats"><span class="file-add">+203</span><span class="file-del">-2</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +203</span><span class="summary-item"><span class="dot-red">●</span> -2</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">4882db4</span><span class="commit-date">2026-06-09 22:44</span></div><div class="commit-msg">新增 projects.md：9 大分类共 135 个热门 AI 项目</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> assets/projects.md</span><span class="file-stats"><span class="file-add">+221</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +221</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">4839b3f</span><span class="commit-date">2026-06-09 22:00</span></div><div class="commit-msg">二级导航增加生图/生视频 tab</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/index.html</span><span class="file-stats"><span class="file-add">+76</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +76</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">65f5339</span><span class="commit-date">2026-06-09 21:56</span></div><div class="commit-msg">追加文生图 TOP30 + 文生视频 TOP30 到 models.md</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> assets/models.md</span><span class="file-stats"><span class="file-add">+83</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +83</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">3894594</span><span class="commit-date">2026-06-09 21:46</span></div><div class="commit-msg">热门模型增加二级导航：默认/国产</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/index.html</span><span class="file-stats"><span class="file-add">+79</span><span class="file-del">-1</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +79</span><span class="summary-item"><span class="dot-red">●</span> -1</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">6ec29fe</span><span class="commit-date">2026-06-09 21:40</span></div><div class="commit-msg">追加国产大模型 TOP 30 到 models.md</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> .workbuddy/memory/2026-06-07.md</span><span class="file-stats"><span class="file-add">+3</span></span></div><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> assets/models.md</span><span class="file-stats"><span class="file-add">+59</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 2 files</span><span class="summary-item"><span class="dot-green">●</span> +62</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">485359e</span><span class="commit-date">2026-06-08 23:53</span></div><div class="commit-msg">更新 Git History 页面（10 条提交记录）</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/git-history.html</span><span class="file-stats"><span class="file-add">+124</span><span class="file-del">-309</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +124</span><span class="summary-item"><span class="dot-red">●</span> -309</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">44083d1</span><span class="commit-date">2026-06-08 23:47</span></div><div class="commit-msg">添加会话结束规则：更新 Git History + 部署到 gh-pages</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span><span class="file-stats"><span class="file-add">+2</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 1 file</span><span class="summary-item"><span class="dot-green">●</span> +2</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">f3e3d90</span><span class="commit-date">2026-06-08 23:33</span></div><div class="commit-msg">添加历史版本：dist/v1 和 dist/v2</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> dist/v1/ + dist/v2/</span><span class="file-stats"><span class="file-add">+1523</span></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 6 files</span><span class="summary-item"><span class="dot-green">●</span> +1523</span></div></div></div>
+            <div class="commit"><div class="commit-card"><div class="commit-top"><span class="commit-hash">e7863cb</span><span class="commit-date">2026-06-08 23:24</span></div><div class="commit-msg">重构目录：创建 dist/ 部署目录</div><div class="commit-files"><div class="file-row"><span class="file-name"><span class="file-icon md">M</span> AGENTS.md</span><span class="file-stats"><span class="file-add">+6</span><span class="file-del">-3</span></span></div><div class="file-row"><span class="file-name"><span class="file-icon html">H</span> index.html → dist/index.html</span><span class="file-stats"></span></div></div><div class="commit-summary"><span class="summary-item"><span class="dot-amber">●</span> 4 files</span><span class="summary-item"><span class="dot-green">●</span> +8</span><span class="summary-item"><span class="dot-red">●</span> -3</span></div></div></div>
         </div>
-        <div class="footer">Generated by AIBOX · 2026-06-08</div>
+        <div class="footer">Generated by AIBOX · 2026-06-09</div>
     </div>
 </body>
 </html>
