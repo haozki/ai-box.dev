@@ -10,6 +10,7 @@
 
 - `dist/` — 部署目录（index.html, git-history.html, v1/, v2/）
 - `assets/` — 参考数据（models.md, projects.md, coding-agents.md, companies.md）
+- `ProjectsCollection/` — AI项目资料库（10个项目，面向公众号文章素材，每个含info.md+asset/）
 - `AGENTS.md` — 项目级规则
 
 ## 数据来源
