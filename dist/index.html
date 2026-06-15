@@ -521,6 +521,478 @@
             .hero-stats { grid-template-columns: 1fr; }
             .nav-container { height: 56px; }
         }
+
+        /* ========== 每日分享 ========== */
+        .daily-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding-bottom: 40px;
+        }
+
+        .daily-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .daily-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,255,200,0.2), rgba(255,45,123,0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .daily-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+        }
+
+        .daily-card:hover::before { opacity: 1; }
+
+        .daily-card-cover {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .daily-card-body {
+            padding: 20px;
+        }
+
+        .daily-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .daily-card-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: var(--surface-raised);
+            padding: 4px;
+            flex-shrink: 0;
+        }
+
+        .daily-card-logo.svg-logo {
+            filter: brightness(0) invert(1);
+            padding: 6px;
+        }
+
+        .daily-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .daily-card-cat {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(0,255,200,0.1);
+            color: var(--cyan);
+            border: 1px solid rgba(0,255,200,0.2);
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        .daily-card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .daily-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .daily-card-price {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--amber);
+            font-weight: 600;
+        }
+
+        .daily-card-arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--surface-raised);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .daily-card:hover .daily-card-arrow {
+            background: var(--cyan);
+            color: var(--bg);
+        }
+
+        /* 详情浮层 */
+        .detail-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .detail-overlay.open {
+            display: flex;
+            animation: overlayIn 0.3s ease;
+        }
+
+        @keyframes overlayIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .detail-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: panelIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .detail-panel::-webkit-scrollbar { width: 4px; }
+        .detail-panel::-webkit-scrollbar-track { background: transparent; }
+        .detail-panel::-webkit-scrollbar-thumb { background: var(--surface-raised); border-radius: 2px; }
+
+        .detail-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .detail-close:hover { background: rgba(255,255,255,0.2); }
+
+        .detail-cover {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .detail-body {
+            padding: 32px;
+        }
+
+        .detail-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .detail-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: var(--surface-raised);
+            padding: 6px;
+            flex-shrink: 0;
+        }
+
+        .detail-logo.svg-logo {
+            filter: brightness(0) invert(1);
+            padding: 8px;
+        }
+
+        .detail-title-block { flex: 1; }
+
+        .detail-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .detail-cat {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 4px;
+            background: rgba(0,255,200,0.1);
+            color: var(--cyan);
+            border: 1px solid rgba(0,255,200,0.2);
+            display: inline-block;
+        }
+
+        .detail-visit {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: var(--cyan);
+            color: var(--bg);
+            font-weight: 700;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .detail-visit:hover {
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-2px);
+        }
+
+        .detail-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .detail-meta-item {
+            background: var(--surface-raised);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .detail-meta-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .detail-meta-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .detail-section {
+            margin-bottom: 28px;
+        }
+
+        .detail-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-section-title .icon {
+            font-size: 18px;
+        }
+
+        .detail-features {
+            display: grid;
+            gap: 10px;
+        }
+
+        .detail-feature {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .detail-feature-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .detail-feature-name {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .detail-feature-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .detail-screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .detail-screenshot {
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .detail-screenshot img {
+            width: 100%;
+            display: block;
+        }
+
+        .detail-quote {
+            background: var(--surface-raised);
+            border-left: 3px solid var(--cyan);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+        }
+
+        .detail-quote-text {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .detail-quote-source {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-family: var(--font-mono);
+        }
+
+        .detail-steps {
+            display: grid;
+            gap: 10px;
+            counter-reset: step;
+        }
+
+        .detail-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            counter-increment: step;
+        }
+
+        .detail-step::before {
+            content: counter(step);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--cyan);
+            color: var(--bg);
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .detail-step-text {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.6;
+            padding-top: 3px;
+        }
+
+        .detail-step-text strong {
+            color: var(--cyan);
+        }
+
+        .detail-editor {
+            background: linear-gradient(135deg, rgba(0,255,200,0.05), rgba(255,45,123,0.05));
+            border: 1px solid rgba(0,255,200,0.15);
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+
+        .detail-editor-label {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--cyan);
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .detail-editor-text {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .daily-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .daily-card-cover { height: 120px; }
+            .detail-panel { max-height: 95vh; border-radius: 16px; }
+            .detail-body { padding: 20px; }
+            .detail-cover { height: 180px; }
+            .detail-head { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 480px) {
+            .daily-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -534,6 +1006,7 @@
                 <div class="nav-link active" onclick="switchPage('home', this)">首页</div>
                 <div class="nav-link" onclick="switchPage('models', this)">热门模型</div>
                 <div class="nav-link" onclick="switchPage('projects', this)">热门项目</div>
+                <div class="nav-link" onclick="switchPage('daily', this)">每日分享</div>
             </div>
         </div>
     </nav>
@@ -642,9 +1115,27 @@
                 <div id="proj-eval" class="sub-page"><div class="ranking-list" id="eval-list"></div></div>
             </div>
         </div>
-    </div>
 
-    <script>
+        <!-- 每日分享 -->
+        <div id="daily" class="page">
+            <div class="ranking-header">
+                <h2 class="ranking-title">
+                    <span class="ranking-title-icon">✨</span>
+                    每日分享
+                </h2>
+                <p class="ranking-update">精选 10 个值得关注的 AI 产品</p>
+            </div>
+            <div id="daily-grid" class="daily-grid"></div>
+        </div>
+
+        <!-- 项目详情浮层 -->
+        <div id="detail-overlay" class="detail-overlay" onclick="closeDetail(event)">
+            <div class="detail-panel" onclick="event.stopPropagation()">
+                <button class="detail-close" onclick="closeDetail()">&times;</button>
+                <div id="detail-content"></div>
+            </div>
+        </div>
+    </div>
         const modelsData = [
             { name: "GPT-5.5-high", desc: "OpenAI 当前综合能力最强，多模态旗舰", badge: "OpenAI", metric: "1506", metricLabel: "Arena Elo", logo: "https://models.dev/logos/openai.svg" },
             { name: "Claude Opus 4.7 Thinking", desc: "Anthropic 深度推理模型，长上下文处理能力突出", badge: "Anthropic", metric: "1505", metricLabel: "Arena Elo", logo: "https://models.dev/logos/anthropic.svg" },
@@ -1047,6 +1538,474 @@
             renderRanking('audio-list', audioData, false);
             renderRanking('frontend-list', frontendData, false);
             renderRanking('eval-list', evalData, false);
+        });
+
+        // ========== 每日分享 ==========
+        const dailyProjects = [
+            {
+                id: "chatgpt",
+                name: "ChatGPT",
+                subtitle: "全球月活10亿的AI助手天花板",
+                category: "AI助手/效率",
+                price: "免费 / Plus $20/月",
+                website: "https://chat.openai.com",
+                cover: "projects/chatgpt/cover.png",
+                logo: "projects/chatgpt/logo.png",
+                logoType: "img",
+                desc: "上线3年，月活突破10亿——ChatGPT是有史以来增长最快的消费级应用。全能多模态+GPT-5推理引擎+插件生态，全球用户的默认AI选择。",
+                highlights: ["月活10亿，史上增长最快消费级应用", "GPT-5推理引擎，复杂推理准确率92%", "联网搜索+插件生态+GPT Store"],
+                features: [
+                    { name: "全能多模态", desc: "文字、图片、语音、代码、文件分析全支持" },
+                    { name: "GPT-5推理引擎", desc: "复杂推理准确率92%，代码生成、数学证明行业顶尖" },
+                    { name: "联网搜索", desc: "实时获取最新信息，回答带来源引用" },
+                    { name: "插件生态 + GPT Store", desc: "数千个专用GPTs，覆盖法律、医疗、设计等" },
+                    { name: "跨平台流畅体验", desc: "网页、iOS、Android、桌面端全平台同步" }
+                ],
+                screenshots: ["projects/chatgpt/screenshot-1.png"],
+                quotes: [
+                    { text: "ChatGPT没有网上骂得那么差，日常对话还是最顺手的。", source: "Reddit用户，2026" },
+                    { text: "GPT-5的推理能力确实强，complex math gets right about 92%. Worth the $20/month.", source: "Reddit r/ChatGPT, 2026" }
+                ],
+                steps: [
+                    "访问 chat.openai.com（国内需科学上网）",
+                    "用邮箱或Google账号注册，免费版可直接使用",
+                    "免费用户用GPT-4o mini，付费用户可选GPT-5",
+                    "直接输入问题，支持文字、图片、文件上传",
+                    "点击 Explore GPTs 发现专用工具"
+                ],
+                editorNote: "ChatGPT不是完美的，但它是目前最"全能"的AI助手。最大的坑是"谄媚倾向"——提示词里加一句"请批判性思考，指出我观点里的问题"会好很多。国产替代：Kimi（长文档）、通义千问（免费好用）。"
+            },
+            {
+                id: "claude",
+                name: "Claude",
+                subtitle: "不说废话的AI助手，写作和代码双双天花板",
+                category: "AI助手/编程/写作",
+                price: "免费 / Pro $20/月 / Max $100/月",
+                website: "https://claude.ai",
+                cover: "projects/claude/cover.png",
+                logo: "projects/claude/logo.svg",
+                logoType: "svg",
+                desc: "别的AI都在拼命讨好你，Claude却敢说真话。20万Token超长上下文+Claude Code编程助手+Computer Use自主操控，开发者和企业用户首选。",
+                highlights: ["20万Token超长上下文，长文档处理行业第一", "Claude Code年化收入3亿美元，开发者最爱", "宪法AI安全框架，幻觉率远低于ChatGPT"],
+                features: [
+                    { name: "20万Token超长上下文", desc: "一次性处理整本书、法律合同、大型代码库" },
+                    { name: "Claude Code编程助手", desc: "多文件重构、自主调试，开发者开了挂般的体验" },
+                    { name: "Computer Use自主操控", desc: "Claude能自己点击、滚动、操作电脑" },
+                    { name: "宪法AI安全第一", desc: "幻觉率远低于ChatGPT，企业用户首选" },
+                    { name: "无广告纯净体验", desc: "ChatGPT已开始推广告，Claude坚持无广告" }
+                ],
+                screenshots: ["projects/claude/screenshot-1.png"],
+                quotes: [
+                    { text: "Your app is super slow because your backend code is dumb as fuck. — Claude直接回复用户，事后证明说得对，还帮用户重构了后端。", source: "Reddit, 2026" },
+                    { text: "高强度使用Claude Code三个月，生产力爆炸，感觉像'开了挂'。", source: "CSDN博客, 2026" }
+                ],
+                steps: [
+                    "访问 claude.ai（国内需科学上网）",
+                    "用邮箱注册，免费版可用Claude 3.5 Sonnet",
+                    "重度用户建议Pro $20/月，开发者建议Max $100/月",
+                    "直接输入需求，支持上传文档、代码文件",
+                    "开发者可安装VS Code插件体验Claude Code"
+                ],
+                editorNote: "Claude是我个人最常用的AI助手。原因很简单：它不说废话。最大的坑是配额不透明——Pro用户经常遇到突然不能用。建议重度用户直接上Max。国产替代：Kimi（长文档中文更强）、通义千问（免费）。"
+            },
+            {
+                id: "heygen",
+                name: "HeyGen",
+                subtitle: "AI数字人视频，3分钟生成专业口播",
+                category: "AI视频/数字人/营销",
+                price: "免费 / Creator $29/月 / Pro $99/月",
+                website: "https://www.heygen.com",
+                cover: "projects/heygen/cover.png",
+                logo: "projects/heygen/logo.svg",
+                logoType: "svg",
+                desc: "不需要摄像机，不需要演员，不需要剪辑——你写一段脚本，HeyGen让你"分身"出镜讲出来。Avatar IV逼真度到了以假乱真的程度。",
+                highlights: ["Forbes AI 50上榜", "Avatar IV：3分钟口播视频，非专业观众盲测无法区分真人与AI", "175+语言唇形同步配音"],
+                features: [
+                    { name: "Avatar IV数字人模型", desc: "自然眨眼、手势与情绪同步，3分钟内盲测无法区分真人与AI" },
+                    { name: "175+语言视频翻译", desc: "唇形同步配音，保留原声语调" },
+                    { name: "Video Agent 2.0", desc: "输入产品名+目标受众，自动完成全流程" },
+                    { name: "语音克隆", desc: "克隆本人声音，跨语言保持一致" },
+                    { name: "SCORM导出", desc: "企业培训场景一站式交付，对接LMS" }
+                ],
+                screenshots: ["projects/heygen/screenshot-1.png", "projects/heygen/screenshot-2.png"],
+                quotes: [
+                    { text: "第一次看到生成结果时以为同事在跟我开玩笑。", source: "AI星球评测" },
+                    { text: "多语言翻译功能光这一个功能就值回票价。", source: "AI星球评测" }
+                ],
+                steps: [
+                    "访问 heygen.com（国内需科学上网）",
+                    "用邮箱注册，先试免费版（1分钟视频/月，带水印）",
+                    "个人创作者推荐Creator $29/月，小团队推荐Pro $99/月",
+                    "选择模板或空白项目，输入脚本，选择数字人形象",
+                    "脚本按60-90秒分段生成，避免超长脚本表情抖动"
+                ],
+                editorNote: "HeyGen是AI数字人赛道里我最推荐的工具。Avatar IV逼真度真的到了以假乱真的程度——当然仅限3分钟以内短口播。最大坑是额度消耗远超预期，每次重渲染都计额度。国产替代：闪剪（更便宜）、D-ID（更轻量）。"
+            },
+            {
+                id: "keling",
+                name: "可灵",
+                subtitle: "国产AI视频王者，用户破亿的视频生成神器",
+                category: "AI视频/国产/创意",
+                price: "免费 / Standard $6.99/月 / Pro $25.99/月",
+                website: "https://klingai.com",
+                cover: "projects/keling/cover.png",
+                logo: "projects/keling/logo.svg",
+                logoType: "svg",
+                desc: "Runway只能10秒，Sora还在排队——可灵3.0一次生成15秒还能续写到3分钟，自带音画同步和中文支持，不用翻墙。",
+                highlights: ["用户破亿，国产AI视频第一", "可灵3.0：智能分镜+15秒生成+音画同步", "国内直接访问，不用翻墙"],
+                features: [
+                    { name: "智能分镜系统", desc: "AI自动编排多镜头序列，一个人就能当导演" },
+                    { name: "15秒超长生成+3分钟续写", desc: "远超Runway(10秒)和Sora(20秒)" },
+                    { name: "音画同步+多语混说", desc: "多人同框指定谁说话，支持中英日韩西+方言" },
+                    { name: "原生级文字渲染", desc: "招牌、字幕高保真保留，电商场景刚需" },
+                    { name: "国内直接访问", desc: "不用翻墙、不用VPN、中文原生支持" }
+                ],
+                screenshots: ["projects/keling/screenshot-1.png"],
+                quotes: [
+                    { text: "这可能是目前国内最好的视频大模型。", source: "机器之心评测, 2025" },
+                    { text: "性价比最高：起步价$6.99/月，低于Runway($15)和Pika($8)，且国内直接访问无需VPN。", source: "klingapi.com评测" }
+                ],
+                steps: [
+                    "访问 klingai.com（国内直接访问，无需翻墙）",
+                    "用手机号或邮箱注册，注册即送66积分",
+                    "新手建议从Kling 2.5 Turbo开始，熟悉后升级到3.0",
+                    "输入文字描述，选择时长和宽高比，等待生成",
+                    "Standard $6.99/月够轻度使用，Pro $25.99/月适合专业创作者"
+                ],
+                editorNote: "可灵是国产AI视频赛道最没有争议的第一名。在"国内可用性"维度上完全碾压所有海外竞品。最大坑是1080p分辨率上限——需要4K选Runway和Luma。选可灵还是Runway？国内用户+中文需求→可灵；专业影视+翻墙条件→Runway。"
+            },
+            {
+                id: "kimi",
+                name: "Kimi",
+                subtitle: "国产长文档处理之王，200万Token上下文",
+                category: "AI助手/长文档/国产",
+                price: "免费 / Kimi Pro ¥99/月",
+                website: "https://kimi.moonshot.cn",
+                cover: "projects/kimi/cover.png",
+                logo: "projects/kimi/logo.svg",
+                logoType: "svg",
+                desc: "别的AI读个PDF就喊"内容太长"，Kimi能把整本书扔进去还给你逐章分析。200万Token上下文，国产AI里"读书"最强的选手。",
+                highlights: ["200万Token超长上下文，国产AI中最长", "k1.5深度推理，部分任务超过GPT-4o", "国内直接访问，中文场景优化"],
+                features: [
+                    { name: "200万Token超长上下文", desc: "上传整本书PDF、几十份年报、完整代码库，全部读完再回答" },
+                    { name: "k1.5深度推理", desc: "推理过程透明可见，数学逻辑科学推理表现优异" },
+                    { name: "Kimi探索版", desc: "自动多轮网络搜索，几分钟生成带引用来源的完整报告" },
+                    { name: "多模态理解", desc: "支持图表、表格、数学公式等复杂视觉内容" },
+                    { name: "中文场景优化", desc: "中文长文档处理效果优于ChatGPT，国内直接访问" }
+                ],
+                screenshots: ["projects/kimi/screenshot-1.png"],
+                quotes: [
+                    { text: "Kimi不是最全能的AI助手，但在'读懂超长文档'这件事上，它是目前国内做得最好的。", source: "老达AI博客, 2026" },
+                    { text: "如果你的工作高度依赖文档处理，Kimi几乎是目前国内最好的选择。", source: "老达AI博客" }
+                ],
+                steps: [
+                    "访问 kimi.moonshot.cn（国内直接访问，无需科学上网）",
+                    "用手机号注册，免费版直接可用",
+                    "支持PDF、Word、Excel等格式，直接拖拽上传",
+                    "针对上传的文档提问，Kimi基于全文回答",
+                    "重度文档用户建议Pro ¥99/月，解锁200万Token"
+                ],
+                editorNote: "Kimi是国产AI里我最推荐给文档重度用户的工具。但如果你只是想聊天、写个文案或写代码，Kimi不是最优选——豆包聊天更自然，DeepSeek写代码更强。选Kimi还是ChatGPT？需要读长中文文档→Kimi；需要全能+英文→ChatGPT。"
+            },
+            {
+                id: "midjourney",
+                name: "Midjourney",
+                subtitle: "AI绘画审美天花板，设计师的灵感引擎",
+                category: "AI绘画/创意",
+                price: "Basic $10/月 / Standard $30/月 / Pro $60/月",
+                website: "https://midjourney.com",
+                cover: "projects/midjourney/cover.png",
+                logo: "projects/midjourney/logo.png",
+                logoType: "img",
+                desc: "别的AI在拼命"画对"，Midjourney在拼命"画美"。当DALL-E还在纠结手指画几根的时候，Midjourney的作品已经可以直接当杂志封面了。",
+                highlights: ["V7/V8.1版本，行业审美标杆", "Draft Mode出图速度提升10倍", "Omni Reference跨场景角色一致性"],
+                features: [
+                    { name: "Draft Mode草稿模式", desc: "出图速度提升10倍，成本降低50%，先铺量再选优" },
+                    { name: "Omni Reference角色一致", desc: "跨场景保持角色外观一致，重绘次数从10+降到2" },
+                    { name: "Personalization个性化", desc: "AI学习你的审美偏好，自动匹配你的风格" },
+                    { name: "视频生成", desc: "图片转5-21秒动画，营销帖子互动率提升40%" },
+                    { name: "Web应用全功能", desc: "不再依赖Discord，编辑器画布社区画廊一体" }
+                ],
+                screenshots: ["projects/midjourney/screenshot-1.png"],
+                quotes: [
+                    { text: "这比我雇一位初级概念画师的结果还好，一个下午就能拿到50个方案。", source: "游戏开发者, SimilarLabs评测" },
+                    { text: "换成完全独特的背景后，互动率提升了25%。", source: "社交媒体经理, SimilarLabs评测" }
+                ],
+                steps: [
+                    "访问 midjourney.com（国内需科学上网）",
+                    "用邮箱注册，选择订阅方案（推荐Standard $30/月）",
+                    "在Web应用中输入描述词（prompt），等待出图",
+                    "探索阶段用Draft Mode（便宜快），确定方向后切标准模式",
+                    "Standard方案包含无限Relax Mode，2-5分钟无限生成"
+                ],
+                editorNote: "Midjourney是我用过的最"有品味"的AI绘画工具。图不是最"准"的，但绝对是最"好看"的。最大坑是没有免费版——最低$10/月起。文字渲染几乎不可用，需要文字还是用DALL-E 3或后期PS。审美天花板定位短期内无人撼动。"
+            },
+            {
+                id: "perplexity",
+                name: "Perplexity",
+                subtitle: "能替代Google的AI搜索引擎，每个答案都带引用",
+                category: "AI搜索/效率",
+                price: "免费 / Pro $20/月 / Education Pro $5/月",
+                website: "https://perplexity.ai",
+                cover: "projects/perplexity/cover.png",
+                logo: "projects/perplexity/logo.svg",
+                logoType: "svg",
+                desc: "Google给你10条蓝色链接让你自己翻，Perplexity直接给你答案+来源——写文章找资料，以前30分钟的活现在5分钟搞定。",
+                highlights: ["月活1亿，同类最佳AI搜索引擎", "每个答案带行内引用，告别AI编造", "Pro Search 3分钟生成综合研究报告"],
+                features: [
+                    { name: "每个答案带行内引用", desc: "点击编号直接跳转原始来源，告别AI编造" },
+                    { name: "Pro Search深度研究", desc: "自动拆解问题，多来源搜索，3分钟生成综合报告" },
+                    { name: "多模型自由切换", desc: "同一界面切换GPT-5.2、Claude Sonnet 4.5、Gemini 3 Pro" },
+                    { name: "Spaces协作知识空间", desc: "创建主题空间，自定义AI角色，邀请团队协作" },
+                    { name: "无广告纯净体验", desc: "没有赞助位、SEO水文、推销，只有答案和来源" }
+                ],
+                screenshots: ["projects/perplexity/screenshot-1.png"],
+                quotes: [
+                    { text: "大约80-90%的信息检索查询中，Perplexity要么持平要么明显更好。", source: "SimilarLabs评测, 2026" },
+                    { text: "过去需要30-60分钟切换标签页的工作，压缩成5分钟的对话。", source: "SimilarLabs评测" }
+                ],
+                steps: [
+                    "访问 perplexity.ai（国内需科学上网）",
+                    "用邮箱注册，免费版可直接使用",
+                    "直接输入问题，获得带引用的答案",
+                    "如果每天5次Pro搜索不够用，升级Pro $20/月",
+                    ".edu邮箱可享Education Pro $5/月"
+                ],
+                editorNote: "Perplexity是"搜索"场景里最好的AI工具。最强场景是找资料+验证信息，最弱是创意写作+日常搜索。对学生来说Education Pro $5/月可能是所有AI工具里性价比最高的。国内目前没有直接替代品。"
+            },
+            {
+                id: "runway",
+                name: "Runway",
+                subtitle: "好莱坞御用AI视频工具，镜头控制最精准",
+                category: "AI视频/影视/创意",
+                price: "免费 / Standard $15/月 / Pro $35/月",
+                website: "https://runwaycn.com",
+                cover: "projects/runway/cover.png",
+                logo: "projects/runway/logo.svg",
+                logoType: "svg",
+                desc: "当别人还在卷"视频时长"的时候，Runway在卷"镜头控制"——推镜、拉镜、平移、旋转，每一个摄影术语它都听得懂。这就是为什么好莱坞电影用它。",
+                highlights: ["Gen-3 Alpha，好莱坞多部电影采用", "Multi Motion Brush + Act-One独特功能", "镜头控制能力同类最强"],
+                features: [
+                    { name: "Multi Motion Brush", desc: "在图片上圈出不同区域，每个区域独立指定运动方向和速度" },
+                    { name: "Act-One角色动画捕捉", desc: "用演员表演视频驱动AI角色，无需专业动捕设备" },
+                    { name: "精准镜头控制", desc: "支持推镜、拉镜、平移、旋转等专业摄影术语" },
+                    { name: "Video to Video风格转换", desc: "上传实拍视频转换为油画/动漫/赛博朋克等风格" },
+                    { name: "复杂视觉特效", desc: "爆炸、火焰、烟雾、液体飞溅等特效处理质量领先" }
+                ],
+                screenshots: ["projects/runway/screenshot-1.png"],
+                quotes: [
+                    { text: "Runway在AI视频生成工具百花齐放的2026年，定位越来越清晰：专注于最可控、最精准、工具链最完整的体验。", source: "老达AI博客, 2026" },
+                    { text: "镜头控制精准性在同类工具中最强，这是Runway无法被替代的核心价值。", source: "Multic评测, 2026" }
+                ],
+                steps: [
+                    "访问 runwaycn.com（国内需科学上网）",
+                    "用邮箱注册，免费版有125积分（约25秒720p视频）",
+                    "独立创作者推荐Standard $15/月，专业用户推荐Pro $35/月",
+                    "输入文字描述或上传参考图片，选择模型生成视频",
+                    "探索阶段用Turbo模型（便宜快），确定方向后用标准模型出精稿"
+                ],
+                editorNote: "Runway是最不急着讨好用户的AI视频工具。别人卷时长卷免费，它卷专业可控性——反而成了好莱坞的选择。最大坑是视频时长只有10秒，需要长视频选Kling。选Runway还是Kling？专业镜头控制→Runway；长视频→Kling。"
+            },
+            {
+                id: "suno",
+                name: "Suno",
+                subtitle: "3分钟创作一首完整歌曲，零音乐基础也能玩",
+                category: "AI音乐/创意",
+                price: "免费 / Pro $8/月 / 旗舰版 $24/月",
+                website: "https://suno.com",
+                cover: "projects/suno/cover.png",
+                logo: "projects/suno/logo.svg",
+                logoType: "svg",
+                desc: "不会乐器、不懂乐理、五音不全——没关系。输入一句"伤感的钢琴民谣"，Suno 3分钟给你一首带人声、带编曲的完整歌曲。",
+                highlights: ["V5最新版，AI音乐生成代表产品", "零音乐基础即可生成完整歌曲", "Suno Studio DAW式编辑器"],
+                features: [
+                    { name: "AI人声生成", desc: "生成逼真且富有表现力的人声，流行/R&B/说唱/民谣各种风格" },
+                    { name: "提示词驱动创作", desc: "输入风格描述，AI自动构建旋律、节奏和歌词" },
+                    { name: "Suno Studio编辑环境", desc: "DAW式编辑器，支持混音片段、调整音轨层" },
+                    { name: "便捷导出", desc: "即时预览、下载和分享，支持MP3和WAV格式" },
+                    { name: "商用授权（付费版）", desc: "Pro版及以上可商用，视频配乐无版权顾虑" }
+                ],
+                screenshots: ["projects/suno/screenshot-1.png"],
+                quotes: [
+                    { text: "即使没有音乐制作背景也能在几分钟内生成完整歌曲——同时生成人声和音乐，听起来连贯且专业混音。", source: "万兴评测, 2026" },
+                    { text: "通过V5等版本持续改进，提供更高的音质和更好的歌词同步。", source: "万兴评测" }
+                ],
+                steps: [
+                    "访问 suno.com（国内可访问，无需科学上网）",
+                    "用邮箱或Google账号注册，免费版每天50积分（约10首歌）",
+                    "输入描述词（如"伤感的钢琴民谣"）或直接写歌词，选择风格",
+                    "生成后即时预览，满意后下载MP3或WAV",
+                    "需要商用或更多额度，Pro $8/月性价比很高"
+                ],
+                editorNote: "Suno的核心价值不是替代音乐人，而是让你能创作以前创不了的东西。短视频配乐、播客BGM、朋友聚会的趣味创作——这些场景Suno比任何工具都好用。Pro $8/月是所有AI工具里最便宜的付费方案之一。竞品：Udio（免费额度更多）、网易天音（中文效果更好）。"
+            },
+            {
+                id: "tongyi",
+                name: "通义千问",
+                subtitle: "国产免费AI中最全面的那个，阿里生态加持",
+                category: "AI助手/办公/国产",
+                price: "免费（个人版）",
+                website: "https://tongyi.aliyun.com",
+                cover: "projects/tongyi/cover.png",
+                logo: "projects/tongyi/logo.svg",
+                logoType: "svg",
+                desc: "不想花钱又想用AI？通义千问可能是你的答案。免费、功能全、阿里生态加持——虽然单项不是最强，但"够用"这件事它做到了极致。",
+                highlights: ["个人版完全免费", "300+开源模型，国内开源生态最完善", "阿里生态深度整合（钉钉AI）"],
+                features: [
+                    { name: "完全免费", desc: "个人版功能全面免费，文本、图片、文档理解一个不少" },
+                    { name: "通义万相图片生成", desc: "支持中文prompt，人像生成质量高，国风/写实/动漫风格多样" },
+                    { name: "阿里生态深度整合", desc: "钉钉AI直接调用，企业客服、文档、数据分析一站式" },
+                    { name: "长文档理解", desc: "支持上传PDF、Word等文档，摘要和问答能力稳定" },
+                    { name: "300+开源模型", desc: "Qwen系列覆盖全尺寸全模态，开发者生态国内最完善" }
+                ],
+                screenshots: ["projects/tongyi/screenshot-1.png"],
+                quotes: [
+                    { text: "通义千问是一款'够用'的AI助手，最大优势是免费和阿里生态整合。", source: "AI Tool CN评测, 2026" },
+                    { text: "国内免费大模型中功能最全面的选择。", source: "AIToolNav评测, 2026" }
+                ],
+                steps: [
+                    "访问 tongyi.aliyun.com（国内直接访问，无需科学上网）",
+                    "用阿里云账号或手机号注册，免费版直接可用",
+                    "文本对话、图片生成、文档上传三合一",
+                    "切换到图片生成模式，输入中文描述词生成图片",
+                    "如果用钉钉，直接在钉钉中搜索"通义千问"使用"
+                ],
+                editorNote: "通义千问是"免费+全面"的典型代表。不是任何单项冠军，但"免费"这个前提下什么都有一点。最大优势是阿里生态：公司用钉钉+阿里云的团队体验远超其他AI。选通义还是Kimi？免费+全面→通义；长文档+深度推理→Kimi。两个都免费，都试试。"
+            }
+        ];
+
+        function renderDailyGrid() {
+            const grid = document.getElementById('daily-grid');
+            let html = '';
+            dailyProjects.forEach((p, i) => {
+                html += `
+                <div class="daily-card" onclick="openDetail(${i})" style="animation-delay: ${i * 0.05}s">
+                    <img class="daily-card-cover" src="${p.cover}" alt="${p.name}" loading="lazy">
+                    <div class="daily-card-body">
+                        <div class="daily-card-header">
+                            <img class="daily-card-logo ${p.logoType === 'svg' ? 'svg-logo' : ''}" src="${p.logo}" alt="${p.name}">
+                            <div>
+                                <div class="daily-card-title">${p.name}</div>
+                                <span class="daily-card-cat">${p.category}</span>
+                            </div>
+                        </div>
+                        <div class="daily-card-desc">${p.subtitle}</div>
+                        <div class="daily-card-footer">
+                            <span class="daily-card-price">${p.price}</span>
+                            <div class="daily-card-arrow">→</div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function openDetail(index) {
+            const p = dailyProjects[index];
+            const overlay = document.getElementById('detail-overlay');
+            const content = document.getElementById('detail-content');
+
+            let screenshotsHtml = '';
+            if (p.screenshots && p.screenshots.length) {
+                screenshotsHtml = `<div class="detail-section">
+                    <div class="detail-section-title"><span class="icon">📸</span> 产品截图</div>
+                    <div class="detail-screenshots">
+                        ${p.screenshots.map(s => `<div class="detail-screenshot"><img src="${s}" alt="${p.name}" loading="lazy"></div>`).join('')}
+                    </div>
+                </div>`;
+            }
+
+            let featuresHtml = p.features.map(f => `
+                <div class="detail-feature">
+                    <div class="detail-feature-bullet"></div>
+                    <div><span class="detail-feature-name">${f.name}</span> — <span class="detail-feature-desc">${f.desc}</span></div>
+                </div>
+            `).join('');
+
+            let quotesHtml = p.quotes.map(q => `
+                <div class="detail-quote">
+                    <div class="detail-quote-text">${q.text}</div>
+                    <div class="detail-quote-source">— ${q.source}</div>
+                </div>
+            `).join('');
+
+            let stepsHtml = p.steps.map(s => `
+                <div class="detail-step"><div class="detail-step-text">${s}</div></div>
+            `).join('');
+
+            content.innerHTML = `
+                <img class="detail-cover" src="${p.cover}" alt="${p.name}">
+                <div class="detail-body">
+                    <div class="detail-head">
+                        <img class="detail-logo ${p.logoType === 'svg' ? 'svg-logo' : ''}" src="${p.logo}" alt="${p.name}">
+                        <div class="detail-title-block">
+                            <div class="detail-title">${p.name}</div>
+                            <span class="detail-cat">${p.category}</span>
+                        </div>
+                        <a class="detail-visit" href="${p.website}" target="_blank" rel="noopener">访问官网 →</a>
+                    </div>
+
+                    <div class="detail-meta">
+                        <div class="detail-meta-item">
+                            <div class="detail-meta-label">PRICE</div>
+                            <div class="detail-meta-value">${p.price}</div>
+                        </div>
+                        <div class="detail-meta-item">
+                            <div class="detail-meta-label">WEBSITE</div>
+                            <div class="detail-meta-value" style="font-size:12px;word-break:break-all">${p.website}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-section-title"><span class="icon">💡</span> 为什么值得关注</div>
+                        <div style="font-size:14px;color:var(--text);line-height:1.8">${p.desc}</div>
+                        <ul style="margin-top:12px;padding-left:0;list-style:none">
+                            ${p.highlights.map(h => `<li style="font-size:13px;color:var(--cyan);line-height:2;padding-left:16px;position:relative"><span style="position:absolute;left:0">•</span>${h}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-section-title"><span class="icon">⚡</span> 核心功能</div>
+                        <div class="detail-features">${featuresHtml}</div>
+                    </div>
+
+                    ${screenshotsHtml}
+
+                    <div class="detail-section">
+                        <div class="detail-section-title"><span class="icon">💬</span> 用户评价</div>
+                        ${quotesHtml}
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-section-title"><span class="icon">🚀</span> 如何上手</div>
+                        <div class="detail-steps">${stepsHtml}</div>
+                    </div>
+
+                    <div class="detail-section" style="margin-bottom:0">
+                        <div class="detail-editor">
+                            <div class="detail-editor-label">✏️ EDITOR'S NOTE</div>
+                            <div class="detail-editor-text">${p.editorNote}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetail(event) {
+            if (event && event.target !== document.getElementById('detail-overlay')) return;
+            document.getElementById('detail-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeDetail();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDailyGrid();
         });
     </script>
 </body>
