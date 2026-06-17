@@ -38,6 +38,9 @@
 
 ## 部署流程
 
-1. `git subtree split --prefix=dist -b gh-pages-deploy`
-2. `git push origin gh-pages-deploy:gh-pages --force`
-3. `git branch -D gh-pages-deploy`
+1. `npm run build` 构建 dist 目录
+2. `git add -f dist/` 强制添加 dist 目录下的所有文件（因为 .gitignore 中有 dist/）
+3. `git commit -m '...'` 提交更改
+4. `git subtree split --prefix=dist -b gh-pages-deploy`
+5. `git push origin gh-pages-deploy:gh-pages --force`
+6. `git branch -D gh-pages-deploy`
