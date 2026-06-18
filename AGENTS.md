@@ -4,7 +4,6 @@
 
 - **修改前必须确认**：任何对代码、数据、样式的修改，必须先向用户说明修改方案，获得明确同意后才能执行。
 - **自动提交**：每次修改完成后，自动 `git add -A && git commit`，提交信息描述本次改动内容，确保可回退。
-- **自动更新 Git History**：每次 git commit 完成后，立刻更新 `git-history.html`。
 - **会话结束自动部署**：每次会话结束前，执行 `npm run build` 构建，然后用 `git subtree split --prefix=dist -b gh-pages-deploy` + `git push origin gh-pages-deploy:gh-pages --force` 部署。
 
 ## 技术栈
@@ -46,14 +45,6 @@ npm run preview
 # 部署到 gh-pages
 npm run build && git subtree split --prefix=dist -b gh-pages-deploy && git push origin gh-pages-deploy:gh-pages --force && git branch -D gh-pages-deploy
 ```
-
-## 数据更新
-
-数据以 JSON 文件存放在 `src/data/` 目录：
-- `models.json` / `cn-models.json` / `image-models.json` / `video-models.json` — 热门模型榜单
-- `projects.json` + 分类数据 — 热门项目榜单
-
-更新榜单时编辑对应 JSON 文件，运行 `npm run build` 重新生成页面。
 
 ## 设计要点
 
